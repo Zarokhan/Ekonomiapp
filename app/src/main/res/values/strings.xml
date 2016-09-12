@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">EkonomiApp</string>
+
+    <string name="date">Datum:</string>
+    <string name="title">Titel:</string>
+    <string name="category">Kategori:</string>
+    <string name="price">Kostnad:</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
