@@ -1,4 +1,4 @@
-package se.mah.ae5929.ekonomiapp;
+package se.mah.ae5929.ekonomiapp.EkonomiFragments;
 
 
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import se.mah.ae5929.ekonomiapp.R;
 
 
 /**
