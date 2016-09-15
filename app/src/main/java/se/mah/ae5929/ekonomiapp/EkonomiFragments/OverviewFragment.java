@@ -1,6 +1,7 @@
 package se.mah.ae5929.ekonomiapp.EkonomiFragments;
 
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,6 +17,8 @@ import se.mah.ae5929.ekonomiapp.Utility.BaseFragment;
  */
 public class OverviewFragment extends BaseFragment {
     public static final String TAG = "Overview_tag";
+
+    private Resources res;
 
     private TextView nameTv;
     private TextView incomesTv;
@@ -39,8 +42,19 @@ public class OverviewFragment extends BaseFragment {
         incomesTv = (TextView)view.findViewById(R.id.incomesTv);
         expensesTv = (TextView)view.findViewById(R.id.expensesTv);
 
+        res = getActivity().getResources();
+
         // Set name on nameTv
         Bundle args = this.getArguments();
         nameTv.setText(args.getString("fname") + " " + args.getString("lname"));
+        setTotalIncomes(args.getInt("total_income"));
+    }
+
+    public void setTotalIncomes(int amount){
+        incomesTv.setText(res.getText(R.string.total_incomes) + " " + amount);
+    }
+
+    public void setTotalExpenses(int amount){
+        expensesTv.setText(res.getText(R.string.total_expenses) + " " + amount);
     }
 }

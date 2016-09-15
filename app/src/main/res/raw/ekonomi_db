@@ -1,0 +1,112 @@
+CREATE TABLE ecategory(
+	title TEXT NOT NULL PRIMARY KEY,
+	removable BOOLEAN NOT NULL
+);
+
+CREATE TABLE icategory(
+	title TEXT NOT NULL PRIMARY KEY,
+	removable BOOLEAN NOT NULL
+);
+
+CREATE TABLE expenses(
+	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	hashid INTEGER NOT NULL,
+	category TEXT NOT NULL,
+	mydate DATE NOT NULL,
+	title TEXT NOT NULL,
+	price INTEGER NOT NULL,
+	FOREIGN KEY (category) REFERENCES ecategory(title)
+);
+
+CREATE TABLE incomes(
+	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	hashid INTEGER NOT NULL,
+	category TEXT NOT NULL,
+	mydate DATE NOT NULL,
+	title TEXT NOT NULL,
+	amount INTEGER NOT NULL,
+	FOREIGN KEY (category) REFERENCES icategory(title)
+);
+
+INSERT INTO ecategory (title, removable) VALUES (
+	'Livsmedel',
+	0
+);
+
+INSERT INTO ecategory (title, removable) VALUES (
+	'Fritid',
+	0
+);
+
+INSERT INTO ecategory (title, removable) VALUES (
+	'Resor',
+	0
+);
+
+INSERT INTO ecategory (title, removable) VALUES (
+	'Boende',
+	0
+);
+
+INSERT INTO ecategory (title, removable) VALUES (
+	'Övrigt',
+	0
+);
+
+INSERT INTO icategory (title, removable) VALUES (
+	'Lön',
+	0
+);
+
+INSERT INTO icategory (title, removable) VALUES (
+	'Övrigt',
+	0
+);
+
+INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
+	677725337,
+	'Livsmedel',
+	date('now'),
+	'Mat',
+	150
+);
+
+INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
+	677725337,
+	'Livsmedel',
+	date('now'),
+	'Mat',
+	150
+);
+
+INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
+	677725337,
+	'Livsmedel',
+	date('now'),
+	'ICA Maxi',
+	564
+);
+
+INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
+	677725337,
+	'Boende',
+	date('now'),
+	'Hyra',
+	15000
+);
+
+INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
+	677725337,
+	'Fritid',
+	date('now'),
+	'Fotboll',
+	99
+);
+
+INSERT INTO incomes (hashid, category, mydate, title, amount) VALUES (
+	677725337,
+	'Lön',
+	date('now'),
+	'Lön',
+	91000
+);
