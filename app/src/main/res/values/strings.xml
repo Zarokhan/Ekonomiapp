@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ekonomi appen</string>
+    <string name="app_name">iEconomy</string>
 
     <string name="date">Datum:</string>
     <string name="title">Titel:</string>
@@ -9,12 +9,15 @@
     <string name="firstname">Firstname:</string>
     <string name="lastname">Lastname:</string>
     <string name="login">Login</string>
+    <string name="remember_me">Remember me</string>
     <string name="no_text_warning">Need to enter text to continue.</string>
     <string name="no_spaces_warning">White space is not allowed.</string>
 
     <string-array name="planets_array">
-        <item>HELLO</item>
-        <item>HELLO TWO</item>
-        <item>BAJS PÅ BRÖD</item>
+        <item>Overview</item>
+        <item>Incomes</item>
+        <item>Expenses</item>
+        <item>About/Settings</item>
+        <item>Sign out</item>
     </string-array>
 </resources>

@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ import se.mah.ae5929.ekonomiapp.Utility.MyFragmentExtension;
  * A simple {@link Fragment} subclass.
  */
 public class OverviewFragment extends MyFragmentExtension {
+    public static final String FRAGMENT_KEY = "jaskdhfkashdfklashdf";
 
     private TextView nameTv;
 
@@ -33,13 +35,10 @@ public class OverviewFragment extends MyFragmentExtension {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
 
-    public OverviewFragment() {
-        // Required empty public constructor
-    }
+    public OverviewFragment() { }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_overview, container, false);
         initComponents(view);
@@ -60,12 +59,7 @@ public class OverviewFragment extends MyFragmentExtension {
         String name = sharedPreferences.getString(LoginFragment.FNAME_KEY, "");
         nameTv.setText(name);
 
-        // Navigation Drawer
-        mPlanetTitles = getResources().getStringArray(R.array.planets_array);
-        mDrawerLayout = (DrawerLayout) getView().findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) getView().findViewById(R.id.left_drawer);
-
-        //mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.));
+        initNavigationDrawer();
     }
 
     @Override
@@ -76,5 +70,22 @@ public class OverviewFragment extends MyFragmentExtension {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(LoginFragment.FNAME_KEY, nameTv.getText().toString());
         editor.apply();
+    }
+
+    private class DrawerItemClickListener implements android.widget.AdapterView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            controller.navSelectItem(position);
+        }
+    }
+
+    private void initNavigationDrawer(){
+        // Navigation Drawer
+        mPlanetTitles = getResources().getStringArray(R.array.planets_array);
+        mDrawerLayout = (DrawerLayout) getView().findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) getView().findViewById(R.id.left_drawer);
+
+        mDrawerList.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, mPlanetTitles));
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
     }
 }
