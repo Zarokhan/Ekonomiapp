@@ -19,11 +19,13 @@
     <string name="total_incomes">Total incomes: </string>
     <string name="total_expenses">Total expenses: </string>
 
+    <string name="expenses">Expenses</string>
+    <string name="incomes">Incomes</string>
+
     <string-array name="planets_array">
         <item>Overview</item>
         <item>Incomes</item>
         <item>Expenses</item>
-        <item>About/Settings</item>
         <item>Sign out</item>
     </string-array>
 

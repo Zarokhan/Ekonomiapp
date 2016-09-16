@@ -1,4 +1,4 @@
-package se.mah.ae5929.ekonomiapp.Base;
+package se.mah.ae5929.ekonomiapp.EkonomiFragments;
 
 
 import android.app.Activity;
@@ -17,14 +17,13 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import se.mah.ae5929.ekonomiapp.Base.LoginController;
 import se.mah.ae5929.ekonomiapp.R;
-import se.mah.ae5929.ekonomiapp.Utility.BaseFragment;
-
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LoginFragment extends BaseFragment {
+public class LoginFragment extends Fragment {
     public static final String FRAGMENT_KEY = "loginfragment";
     public static final String FNAME_KEY = "firstname";
     private static final String LNAME_KEY = "lastname";
@@ -39,6 +38,13 @@ public class LoginFragment extends BaseFragment {
     private String blockCharacterSet = " ";
     private boolean resetRememberMe = false;
 
+    protected LoginController controller;
+    protected String name;
+
+    public void setController(LoginController controller){
+        this.controller = controller;
+    }
+
     private InputFilter filter = new InputFilter() {
 
         @Override
@@ -51,20 +57,19 @@ public class LoginFragment extends BaseFragment {
         }
     };
 
-    public LoginFragment() {
-        // Required empty public constructor
-    }
+    public LoginFragment() { }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-        initComponents(view);
-        name = "Login";
+        initFragmentComponents(view);
         return view;
     }
 
-    private void initComponents(View view){
+    protected void initFragmentComponents(View view) {
+        name = "Login";
+
         fnameEt = (EditText)view.findViewById(R.id.nameEt);
         lnameEt = (EditText)view.findViewById(R.id.surnameEt);
         loginBn = (Button)view.findViewById(R.id.loginBn);
@@ -78,6 +83,8 @@ public class LoginFragment extends BaseFragment {
         // Filter for white spaces
         fnameEt.setFilters(new InputFilter[] {filter});
         lnameEt.setFilters(new InputFilter[] {filter});
+
+        getActivity().setTitle(name);
     }
 
     @Override
@@ -114,10 +121,6 @@ public class LoginFragment extends BaseFragment {
     @Override
     public void onSaveInstanceState(Bundle outState){
         super.onSaveInstanceState(outState);
-        saveMyInstance();
-    }
-
-    private void saveMyInstance(){
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(FRAGMENT_KEY, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(FNAME_KEY, fnameEt.getText().toString());
@@ -134,7 +137,7 @@ public class LoginFragment extends BaseFragment {
     private class LoginClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            saveMyInstance();
+            onSaveInstanceState(new Bundle());
             controller.loginUser(fnameEt.getText().toString(), lnameEt.getText().toString());
         }
     }
@@ -148,4 +151,6 @@ public class LoginFragment extends BaseFragment {
     public void resetRememberMe(){
         this.resetRememberMe = true;
     }
+
+    public String getName() {return this.name;}
 }

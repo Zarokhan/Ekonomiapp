@@ -101,12 +101,12 @@ public class MyDB extends SQLiteOpenHelper {
         return counter;
     }
 
-    public int getTotalIncome(){
+    public int getTotalIncome(int hashid){
         int amount = 0;
         int idIndex, hashidIndex, categoryIndex, dateIndex, titleIndex, amountIndex;
 
         SQLiteDatabase db = getWritableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM incomes;", null);
+        Cursor c = db.rawQuery("SELECT * FROM incomes WHERE hashid=" + hashid + ";", null);
         idIndex = c.getColumnIndex("id");
         hashidIndex = c.getColumnIndex("hashid");
         categoryIndex = c.getColumnIndex("mydate");
@@ -118,5 +118,20 @@ public class MyDB extends SQLiteOpenHelper {
             amount += c.getInt(amountIndex);
         }
         return amount;
+    }
+
+    public int getTotalExpenses(int hashid){
+        int price = 0;
+        int priceIndex;
+
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM expenses WHERE hashid=" + hashid + ";", null);
+        priceIndex = c.getColumnIndex("price");
+
+        for(int i = 0; i < c.getCount(); ++i){
+            c.moveToPosition(i);
+            price += c.getInt(priceIndex);
+        }
+        return price;
     }
 }

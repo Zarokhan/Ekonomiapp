@@ -1,4 +1,4 @@
-package se.mah.ae5929.ekonomiapp.Base;
+package se.mah.ae5929.ekonomiapp.EkonomiFragments;
 
 
 import android.os.Bundle;
@@ -21,6 +21,7 @@ import se.mah.ae5929.ekonomiapp.Utility.BaseFragment;
  */
 public class MainFragment extends BaseFragment {
     public static final String FRAGMENT_KEY = "jaskdhfkashdfklashdf";
+    public static final String TAG = "MAINFRAGMENT";
 
     // Navigation drawer
     private String[] mPlanetTitles;
@@ -33,7 +34,7 @@ public class MainFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        name = "Overview";
+        initFragmentComponents(view);
         return view;
     }
 
@@ -42,6 +43,11 @@ public class MainFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
 
         initNavigationDrawer();
+    }
+
+    @Override
+    protected void initFragmentComponents(View view) {
+        name = "Overview";
     }
 
     @Override

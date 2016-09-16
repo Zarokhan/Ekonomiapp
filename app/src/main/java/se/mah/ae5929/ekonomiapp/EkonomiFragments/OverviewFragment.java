@@ -36,7 +36,8 @@ public class OverviewFragment extends BaseFragment {
         return view;
     }
 
-    private void initFragmentComponents(View view) {
+    @Override
+    protected void initFragmentComponents(View view) {
         name = "Overview";
         nameTv = (TextView)view.findViewById(R.id.nameTv);
         incomesTv = (TextView)view.findViewById(R.id.incomesTv);
@@ -48,6 +49,7 @@ public class OverviewFragment extends BaseFragment {
         Bundle args = this.getArguments();
         nameTv.setText(args.getString("fname") + " " + args.getString("lname"));
         setTotalIncomes(args.getInt("total_income"));
+        setTotalExpenses(args.getInt("total_expense"));
     }
 
     public void setTotalIncomes(int amount){
