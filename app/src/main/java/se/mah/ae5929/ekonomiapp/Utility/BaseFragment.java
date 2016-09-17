@@ -23,7 +23,7 @@ public abstract class BaseFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        getActivity().setTitle(name);
+        //getActivity().setTitle(name);
     }
 
     protected abstract void initFragmentComponents(View view);

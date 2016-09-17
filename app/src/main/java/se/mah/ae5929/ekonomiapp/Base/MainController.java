@@ -103,37 +103,31 @@ public class MainController {
 
     // Adds income fragment into main container
     private void addIncomeOverview(){
-        ListViewFragment.ListViewMode mode = ListViewFragment.ListViewMode.IncomeListView;
+        ViewPagerFragment.ViewPagerMode mode = ViewPagerFragment.ViewPagerMode.Incomes;
         Bundle bundle = new Bundle();
         bundle.putInt("total_income", db.getTotalIncome(hashid));
         bundle.putInt("mode", mode.ordinal());
+        bundle.putInt("hashid", hashid);
 
-        ListViewFragment incomefrag = new ListViewFragment();
-        incomefrag.setController(this);
-        incomefrag.setArguments(bundle);
+        ViewPagerFragment frag = new ViewPagerFragment();
+        frag.setController(this);
+        frag.setArguments(bundle);
 
-        activeFragments.add(incomefrag);
-        activity.addMainFragment(incomefrag, ListViewFragment.TAG);
+        activeFragments.add(frag);
+        activity.addMainFragment(frag, ViewPagerFragment.TAG);
     }
 
     // Adds expense fragment into main container
     private void addExpenseOverview(){
-        ListViewFragment.ListViewMode mode = ListViewFragment.ListViewMode.ExpenseListView;
+        ViewPagerFragment.ViewPagerMode mode = ViewPagerFragment.ViewPagerMode.Expenses;
         Bundle bundle = new Bundle();
         bundle.putInt("total_expense", db.getTotalExpenses(hashid));
         bundle.putInt("mode", mode.ordinal());
+        bundle.putInt("hashid", hashid);
 
-        ListViewFragment expensefrag = new ListViewFragment();
-        expensefrag.setController(this);
-        expensefrag.setArguments(bundle);
-
-        activeFragments.add(expensefrag);
-        activity.addMainFragment(expensefrag, ListViewFragment.TAG);
-    }
-
-    private void addViewPager(){
         ViewPagerFragment frag = new ViewPagerFragment();
         frag.setController(this);
+        frag.setArguments(bundle);
 
         activeFragments.add(frag);
         activity.addMainFragment(frag, ViewPagerFragment.TAG);
@@ -181,8 +175,7 @@ public class MainController {
                 break;
             // Expenses
             case 2:
-                //addExpenseOverview();
-                addViewPager();
+                addExpenseOverview();
                 break;
             // Sign out
             case 3:

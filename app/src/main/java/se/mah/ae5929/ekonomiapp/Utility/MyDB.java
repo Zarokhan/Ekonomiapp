@@ -9,7 +9,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
+import se.mah.ae5929.ekonomiapp.DBNodes.ExpenseObj;
+import se.mah.ae5929.ekonomiapp.DBNodes.IncomeObj;
 import se.mah.ae5929.ekonomiapp.R;
 
 /**
@@ -101,6 +105,7 @@ public class MyDB extends SQLiteOpenHelper {
         return counter;
     }
 
+    // Get total income
     public int getTotalIncome(int hashid){
         int amount = 0;
         int idIndex, hashidIndex, categoryIndex, dateIndex, titleIndex, amountIndex;
@@ -120,6 +125,7 @@ public class MyDB extends SQLiteOpenHelper {
         return amount;
     }
 
+    // Get total expense
     public int getTotalExpenses(int hashid){
         int price = 0;
         int priceIndex;
@@ -133,5 +139,99 @@ public class MyDB extends SQLiteOpenHelper {
             price += c.getInt(priceIndex);
         }
         return price;
+    }
+
+    // Get all income categories
+    public String[] getIncomeCategories(){
+        List<String> cats = new ArrayList<String>();
+        int titleIndex, removableIndex;
+
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM icategory", null);
+        titleIndex = c.getColumnIndex("title");
+        removableIndex = c.getColumnIndex("removable");
+
+        for(int i = 0; i < c.getCount(); ++i){
+            c.moveToPosition(i);
+            cats.add(c.getString(titleIndex));
+        }
+
+        String[] stringarray = new String[cats.size()];
+        for(int i = 0; i < stringarray.length; ++i){
+            stringarray[i] = cats.get(i);
+        }
+
+        return stringarray;
+    }
+
+    // Get all expense categories
+    public String[] getExpenseCategories(){
+        List<String> cats = new ArrayList<String>();
+        int titleIndex, removableIndex;
+
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM ecategory", null);
+        titleIndex = c.getColumnIndex("title");
+        removableIndex = c.getColumnIndex("removable");
+
+        for(int i = 0; i < c.getCount(); ++i){
+            c.moveToPosition(i);
+            cats.add(c.getString(titleIndex));
+        }
+
+        String[] stringarray = new String[cats.size()];
+        for(int i = 0; i < stringarray.length; ++i){
+            stringarray[i] = cats.get(i);
+        }
+
+        return stringarray;
+    }
+
+    public IncomeObj[] getIncomeFromCategory(String category, int hashid){
+        List<IncomeObj> objs = new ArrayList<IncomeObj>();
+        int idIndex, catIndex, dateIndex, titleIndex, amountIndex;
+
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM incomes WHERE category='" + category + "' AND hashid=" + hashid, null);
+        idIndex = c.getColumnIndex("id");
+        catIndex = c.getColumnIndex("category");
+        dateIndex = c.getColumnIndex("mydate");
+        titleIndex = c.getColumnIndex("title");
+        amountIndex = c.getColumnIndex("amount");
+
+        for(int i = 0; i < c.getCount(); ++i){
+            c.moveToPosition(i);
+            objs.add(new IncomeObj(c.getInt(idIndex), c.getString(catIndex), c.getString(dateIndex), c.getString(titleIndex), c.getInt(amountIndex)));
+        }
+
+        IncomeObj[] objsarray = new IncomeObj[objs.size()];
+        for(int i = 0; i < objsarray.length; ++i)
+            objsarray[i] = objs.get(i);
+
+        return objsarray;
+    }
+
+    public ExpenseObj[] getExpenseFromCategory(String category, int hashid){
+        List<ExpenseObj> objs = new ArrayList<ExpenseObj>();
+        int idIndex, catIndex, dateIndex, titleIndex, priceIndex;
+
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM expenses WHERE category='" + category + "' AND hashid=" + hashid, null);
+        idIndex = c.getColumnIndex("id");
+        catIndex = c.getColumnIndex("category");
+        dateIndex = c.getColumnIndex("mydate");
+        titleIndex = c.getColumnIndex("title");
+        priceIndex = c.getColumnIndex("price");
+
+        for(int i = 0; i < c.getCount(); ++i){
+            c.moveToPosition(i);
+            objs.add(new ExpenseObj(c.getInt(idIndex), c.getString(catIndex), c.getString(dateIndex), c.getString(titleIndex), c.getInt(priceIndex)));
+        }
+
+        ExpenseObj[] objsarray = new ExpenseObj[objs.size()];
+        for(int i = 0; i < objsarray.length; ++i)
+            objsarray[i] = objs.get(i);
+
+        return objsarray;
     }
 }
