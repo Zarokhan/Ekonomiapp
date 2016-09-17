@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ public class MyExpenseAdapter extends ArrayAdapter<ExpenseObj> {
             holder.titleTv = (TextView) convertView.findViewById(R.id.titleTv);
             holder.dateTv = (TextView) convertView.findViewById(R.id.dateTv);
             holder.priceTv = (TextView) convertView.findViewById(R.id.priceTv);
+            holder.listIv = (ImageView) convertView.findViewById(R.id.listIv);
 
             convertView.setTag(holder);
         }
@@ -41,6 +43,26 @@ public class MyExpenseAdapter extends ArrayAdapter<ExpenseObj> {
         }
         ExpenseObj obj = this.getItem(pos);
 
+        int imageres;
+        switch (obj.getCategory()){
+            case "Livsmedel":
+                imageres = R.drawable.livsmedel;
+                break;
+            case "Fritid":
+                imageres = R.drawable.fritid;
+                break;
+            case "Resor":
+                imageres = R.drawable.resor;
+                break;
+            case "Boende":
+                imageres = R.drawable.boende;
+                break;
+            default:
+                imageres = R.drawable.other;
+                break;
+        }
+        holder.listIv.setImageResource(imageres);
+        holder.listIv.setAdjustViewBounds(true);
         holder.titleTv.setText(obj.getTitle());
         holder.dateTv.setText(obj.getMydate());
         holder.priceTv.setText("" + obj.getPrice());
@@ -52,5 +74,6 @@ public class MyExpenseAdapter extends ArrayAdapter<ExpenseObj> {
         TextView titleTv;
         TextView dateTv;
         TextView priceTv;
+        ImageView listIv;
     }
 }

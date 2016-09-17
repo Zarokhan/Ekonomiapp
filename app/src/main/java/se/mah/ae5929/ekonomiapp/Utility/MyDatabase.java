@@ -19,23 +19,23 @@ import se.mah.ae5929.ekonomiapp.R;
 /**
  * Created by Zarokhan on 2016-09-15.
  */
-public class MyDB extends SQLiteOpenHelper {
+public class MyDatabase extends SQLiteOpenHelper {
 
-    private static MyDB instance;
+    private static MyDatabase instance;
 
     private static final String DB_NAME = "database";
     private static final int DB_VERSION = 1;
 
     Context context;
 
-    public static synchronized MyDB getInstance(Context context){
+    public static synchronized MyDatabase getInstance(Context context){
         if(instance == null){
-            instance = new MyDB(context);
+            instance = new MyDatabase(context);
         }
         return instance;
     }
 
-    private MyDB(Context context) {
+    private MyDatabase(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
         this.context = context;
     }
@@ -187,6 +187,7 @@ public class MyDB extends SQLiteOpenHelper {
         return stringarray;
     }
 
+    // Gets only income fields from certain category
     public IncomeObj[] getIncomeFromCategory(String category, int hashid){
         List<IncomeObj> objs = new ArrayList<IncomeObj>();
         int idIndex, catIndex, dateIndex, titleIndex, amountIndex;
@@ -211,6 +212,7 @@ public class MyDB extends SQLiteOpenHelper {
         return objsarray;
     }
 
+    // Gets expenses from certain category
     public ExpenseObj[] getExpenseFromCategory(String category, int hashid){
         List<ExpenseObj> objs = new ArrayList<ExpenseObj>();
         int idIndex, catIndex, dateIndex, titleIndex, priceIndex;
@@ -233,5 +235,37 @@ public class MyDB extends SQLiteOpenHelper {
             objsarray[i] = objs.get(i);
 
         return objsarray;
+    }
+
+    // Gets total income from category
+    public int getTotalIncomeCategory(String category, int hashid){
+        int amount = 0;
+        int amountIndex;
+
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM incomes WHERE category='" + category + "' AND hashid=" + hashid + ";", null);
+        amountIndex = c.getColumnIndex("amount");
+
+        for(int i = 0; i < c.getCount(); ++i){
+            c.moveToPosition(i);
+            amount += c.getInt(amountIndex);
+        }
+        return amount;
+    }
+
+    // Gets total expense from category
+    public int getTotalExpenseCategory(String category, int hashid){
+        int price = 0;
+        int priceIndex;
+
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM expenses WHERE category='" + category + "' AND hashid=" + hashid + ";", null);
+        priceIndex = c.getColumnIndex("price");
+
+        for(int i = 0; i < c.getCount(); ++i){
+            c.moveToPosition(i);
+            price += c.getInt(priceIndex);
+        }
+        return price;
     }
 }

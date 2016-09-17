@@ -4,6 +4,7 @@ import java.util.Date;
 
 /**
  * Created by Zarokhan on 2016-09-17.
+ * Database node for expense table
  */
 public class ExpenseObj {
     int id;

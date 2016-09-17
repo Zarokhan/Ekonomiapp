@@ -10,6 +10,10 @@ import android.os.Bundle;
 
 import se.mah.ae5929.ekonomiapp.R;
 
+/*
+    Login activity
+    Start activity of application
+ */
 public class LoginActivity extends AppCompatActivity {
     public static final int NAME = 12;
     private LoginController controller;

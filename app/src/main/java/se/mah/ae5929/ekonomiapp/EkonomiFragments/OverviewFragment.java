@@ -14,6 +14,8 @@ import se.mah.ae5929.ekonomiapp.Utility.BaseFragment;
 
 /**
  * A simple {@link Fragment} subclass.
+ * Simple overview of personal economy fragment
+ * First fragment to show when user login
  */
 public class OverviewFragment extends BaseFragment {
     public static final String TAG = "Overview_tag";

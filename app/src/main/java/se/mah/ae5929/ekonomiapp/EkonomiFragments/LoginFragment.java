@@ -22,6 +22,7 @@ import se.mah.ae5929.ekonomiapp.R;
 
 /**
  * A simple {@link Fragment} subclass.
+ * User interface for login
  */
 public class LoginFragment extends Fragment {
     public static final String FRAGMENT_KEY = "loginfragment";

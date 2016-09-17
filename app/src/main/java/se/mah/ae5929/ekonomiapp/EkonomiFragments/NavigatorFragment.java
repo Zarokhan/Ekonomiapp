@@ -18,8 +18,10 @@ import se.mah.ae5929.ekonomiapp.Utility.BaseFragment;
 
 /**
  * A simple {@link Fragment} subclass.
+ * Navigator of application
+ * Main fragment of application
  */
-public class MainFragment extends BaseFragment {
+public class NavigatorFragment extends BaseFragment {
     public static final String FRAGMENT_KEY = "jaskdhfkashdfklashdf";
     public static final String TAG = "MAINFRAGMENT";
 
@@ -28,7 +30,7 @@ public class MainFragment extends BaseFragment {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
 
-    public MainFragment() { }
+    public NavigatorFragment() { }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

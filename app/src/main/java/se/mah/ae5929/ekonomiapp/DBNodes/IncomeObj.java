@@ -2,6 +2,7 @@ package se.mah.ae5929.ekonomiapp.DBNodes;
 
 /**
  * Created by Zarokhan on 2016-09-17.
+ * Database node for income table
  */
 public class IncomeObj {
     int id;

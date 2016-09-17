@@ -14,25 +14,28 @@ import se.mah.ae5929.ekonomiapp.DBNodes.ExpenseObj;
 import se.mah.ae5929.ekonomiapp.DBNodes.IncomeObj;
 import se.mah.ae5929.ekonomiapp.R;
 import se.mah.ae5929.ekonomiapp.Utility.BaseFragment;
-import se.mah.ae5929.ekonomiapp.Utility.MyDB;
+import se.mah.ae5929.ekonomiapp.Utility.MyDatabase;
 import se.mah.ae5929.ekonomiapp.Utility.MyExpenseAdapter;
 import se.mah.ae5929.ekonomiapp.Utility.MyIncomeAdapter;
+import se.mah.ae5929.ekonomiapp.Utility.ViewPagerMode;
 
 /**
  * A simple {@link Fragment} subclass.
+ * List all incomes/expenses within a specific category
  */
-public class ListViewFragment extends BaseFragment {
+public class ListFragment extends BaseFragment {
 
-    public static final String TAG = "ListViewFragment";
+    public static final String TAG = "ListFragment";
 
+    private TextView categoryTv;
     private TextView summaryTv;
     private ListView entryLv;
 
-    private ViewPagerFragment.ViewPagerMode mode;
+    private ViewPagerMode mode;
     private String category;
     private int hashid;
 
-    public ListViewFragment() { }
+    public ListFragment() { }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,23 +47,29 @@ public class ListViewFragment extends BaseFragment {
 
     @Override
     protected void initFragmentComponents(View view){
+        categoryTv = (TextView)view.findViewById(R.id.categoryTv);
         summaryTv = (TextView)view.findViewById(R.id.summaryTv);
         entryLv = (ListView)view.findViewById(R.id.entryLv);
 
         Resources res = getActivity().getResources();
-        MyDB db = MyDB.getInstance(getActivity().getApplicationContext());
+        MyDatabase db = MyDatabase.getInstance(getActivity().getApplicationContext());
         Bundle args = this.getArguments();
 
-        mode = ViewPagerFragment.ViewPagerMode.values()[args.getInt("mode", 0)];
+        mode = ViewPagerMode.values()[args.getInt("mode", 0)];
         category = args.getString("cat");
         hashid = args.getInt("hashid");
 
+        categoryTv.setText(category);
         switch (mode){
             case Incomes:
+                summaryTv.setText(res.getString(R.string.total) + db.getTotalIncomeCategory(category, hashid));
+
                 IncomeObj[] objs = db.getIncomeFromCategory(category, hashid);
                 entryLv.setAdapter(new MyIncomeAdapter(getActivity(), objs));
                 break;
             case Expenses:
+                summaryTv.setText(res.getString(R.string.total) + db.getTotalExpenseCategory(category, hashid));
+
                 ExpenseObj[] objs2 = db.getExpenseFromCategory(category, hashid);
                 entryLv.setAdapter(new MyExpenseAdapter(getActivity(), objs2));
                 break;

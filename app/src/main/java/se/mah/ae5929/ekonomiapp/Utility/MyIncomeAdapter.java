@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ public class MyIncomeAdapter extends ArrayAdapter<IncomeObj> {
             holder.titleTv = (TextView) convertView.findViewById(R.id.titleTv);
             holder.dateTv = (TextView) convertView.findViewById(R.id.dateTv);
             holder.amountTv = (TextView) convertView.findViewById(R.id.amountTv);
+            holder.listIv = (ImageView) convertView.findViewById(R.id.listIv);
 
             convertView.setTag(holder);
         }
@@ -40,6 +42,18 @@ public class MyIncomeAdapter extends ArrayAdapter<IncomeObj> {
             holder = (ViewHolder)convertView.getTag();
         }
         IncomeObj obj = this.getItem(pos);
+
+        int imageres;
+        switch (obj.getCategory()){
+            case "Lön":
+                imageres = R.drawable.pay;
+                break;
+            default:
+                imageres = R.drawable.other;
+                break;
+        }
+        holder.listIv.setImageResource(imageres);
+        holder.listIv.setAdjustViewBounds(true);
 
         holder.titleTv.setText(obj.getTitle());
         holder.dateTv.setText(obj.getMydate());
@@ -52,5 +66,6 @@ public class MyIncomeAdapter extends ArrayAdapter<IncomeObj> {
         TextView titleTv;
         TextView dateTv;
         TextView amountTv;
+        ImageView listIv;
     }
 }

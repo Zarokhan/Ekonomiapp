@@ -11,6 +11,9 @@ import se.mah.ae5929.ekonomiapp.R;
 // NOTES
 // NOT USE PICCASSO
 
+/*
+    Main activity of application
+ */
 public class EkoActivity extends AppCompatActivity {
     private MainController controller;
 
@@ -34,7 +37,7 @@ public class EkoActivity extends AppCompatActivity {
         ft.commit();
     }
 
-    // Adds fragment to MainFragment container
+    // Adds fragment to NavigatorFragment container
     public void addMainFragment(Fragment frag, String tag){
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
@@ -45,6 +48,7 @@ public class EkoActivity extends AppCompatActivity {
 
     // Removes fragment
     public void removeFragment(Fragment frag){
+
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 

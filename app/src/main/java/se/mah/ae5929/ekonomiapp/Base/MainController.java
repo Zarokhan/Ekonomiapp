@@ -14,31 +14,33 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import se.mah.ae5929.ekonomiapp.EkonomiFragments.ListViewFragment;
-import se.mah.ae5929.ekonomiapp.EkonomiFragments.MainFragment;
+import se.mah.ae5929.ekonomiapp.EkonomiFragments.NavigatorFragment;
 import se.mah.ae5929.ekonomiapp.EkonomiFragments.OverviewFragment;
 import se.mah.ae5929.ekonomiapp.EkonomiFragments.ViewPagerFragment;
-import se.mah.ae5929.ekonomiapp.R;
-import se.mah.ae5929.ekonomiapp.Utility.MyDB;
+import se.mah.ae5929.ekonomiapp.Utility.MyDatabase;
+import se.mah.ae5929.ekonomiapp.Utility.ViewPagerMode;
 
 /**
  * Created by Zarokhan on 2016-09-16.
+ * Handles main part of application
  */
 public class MainController {
     private static final String SELECT_ITEM_KEY = "selectitem";
+    public static final String SELECT_TAB_KEY = "selecttabhabbi";
 
     private EkoActivity activity;
 
-    private MainFragment mainFragment;
-
+    private NavigatorFragment navFragment;
     private List<Fragment> activeFragments;
+    private ViewPagerMode mode;
 
-    private int selectItem;
+    private int selectedItem;
+    private int selectedTab;
     private int hashid;
     private String fname;
     private String lname;
 
-    private static MyDB db;
+    private static MyDatabase db;
 
     public MainController(EkoActivity activity){
         this.activity = activity;
@@ -53,28 +55,36 @@ public class MainController {
         this.fname = passedData.getStringExtra("fname");
         this.lname = passedData.getStringExtra("lname");
 
-        mainFragment = new MainFragment();
-        mainFragment.setController(this);
-        activity.addFragment(mainFragment, MainFragment.TAG);
+        navFragment = new NavigatorFragment();
+        navFragment.setController(this);
+        activity.addFragment(navFragment, NavigatorFragment.TAG);
         activeFragments = new ArrayList<Fragment>();
-        db = MyDB.getInstance(activity.getApplicationContext());
+        db = MyDatabase.getInstance(activity.getApplicationContext());
 
         onMainFragmentCreated();
     }
 
     private void onMainFragmentCreated(){
-        SharedPreferences sharedPreferences = activity.getSharedPreferences(MainFragment.FRAGMENT_KEY, Activity.MODE_PRIVATE);
-        selectItem = sharedPreferences.getInt(SELECT_ITEM_KEY, 0);
+        SharedPreferences sharedPreferences = activity.getSharedPreferences(NavigatorFragment.FRAGMENT_KEY, Activity.MODE_PRIVATE);
+        selectedItem = sharedPreferences.getInt(SELECT_ITEM_KEY, 0);
+        selectedTab = sharedPreferences.getInt(SELECT_TAB_KEY, 0);
 
         // Add first overview fragment to main
-        initOverview(selectItem);
+        initOverview(selectedItem);
     }
 
     // Save function
     private void saveSelectItem(){
-        SharedPreferences sharedPreferences = activity.getSharedPreferences(MainFragment.FRAGMENT_KEY, Activity.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = activity.getSharedPreferences(NavigatorFragment.FRAGMENT_KEY, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(SELECT_ITEM_KEY, selectItem);
+        editor.putInt(SELECT_ITEM_KEY, selectedItem);
+        editor.apply();
+    }
+
+    public void saveSelectTab(int currentItem){
+        SharedPreferences sharedPreferences = activity.getSharedPreferences(NavigatorFragment.FRAGMENT_KEY, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(SELECT_TAB_KEY, currentItem);
         editor.apply();
     }
 
@@ -83,6 +93,15 @@ public class MainController {
         for(int i = 0; i < activeFragments.size(); ++i){
             activity.removeFragment(activeFragments.get(i));
         }
+    }
+
+    private ViewPagerFragment getViewPagerFragment(){
+        for(int i = 0; i < activeFragments.size(); ++i){
+            if(activeFragments.get(i) instanceof  ViewPagerFragment){
+                return (ViewPagerFragment)activeFragments.get(i);
+            }
+        }
+        return null;
     }
 
     // Adds overview fragment into main container
@@ -103,11 +122,12 @@ public class MainController {
 
     // Adds income fragment into main container
     private void addIncomeOverview(){
-        ViewPagerFragment.ViewPagerMode mode = ViewPagerFragment.ViewPagerMode.Incomes;
+        ViewPagerMode mode = ViewPagerMode.Incomes;
         Bundle bundle = new Bundle();
         bundle.putInt("total_income", db.getTotalIncome(hashid));
         bundle.putInt("mode", mode.ordinal());
         bundle.putInt("hashid", hashid);
+        bundle.putInt(SELECT_TAB_KEY, selectedTab);
 
         ViewPagerFragment frag = new ViewPagerFragment();
         frag.setController(this);
@@ -119,11 +139,12 @@ public class MainController {
 
     // Adds expense fragment into main container
     private void addExpenseOverview(){
-        ViewPagerFragment.ViewPagerMode mode = ViewPagerFragment.ViewPagerMode.Expenses;
+        ViewPagerMode mode = ViewPagerMode.Expenses;
         Bundle bundle = new Bundle();
         bundle.putInt("total_expense", db.getTotalExpenses(hashid));
         bundle.putInt("mode", mode.ordinal());
         bundle.putInt("hashid", hashid);
+        bundle.putInt(SELECT_TAB_KEY, selectedTab);
 
         ViewPagerFragment frag = new ViewPagerFragment();
         frag.setController(this);
@@ -140,7 +161,7 @@ public class MainController {
         actionBar.setDisplayOptions(actionBar.getDisplayOptions() | ActionBar.DISPLAY_SHOW_CUSTOM);
         ImageView imageView = new ImageView(actionBar.getThemedContext());
         imageView.setScaleType(ImageView.ScaleType.CENTER);
-        imageView.setImageResource(R.drawable.ic_action_expand);
+        //imageView.setImageResource(R.drawable.ic_action_expand);
         ActionBar.LayoutParams params = new ActionBar.LayoutParams(
                 ActionBar.LayoutParams.WRAP_CONTENT,
                 ActionBar.LayoutParams.WRAP_CONTENT,
@@ -152,7 +173,7 @@ public class MainController {
 
     // Navigator on click
     public void navSelectItem(int pos, ListView mDrawerList, String[] mPlanetTitles, DrawerLayout mDrawerLayout){
-        if(pos != selectItem)
+        if(pos != selectedItem)
             initOverview(pos);
 
         // Handles navigator return
@@ -163,7 +184,7 @@ public class MainController {
 
     private void initOverview(int pos){
         removeActiveFragments();
-        selectItem = pos;
+        selectedItem = pos;
         switch (pos){
             // Overview
             case 0:
@@ -188,7 +209,7 @@ public class MainController {
     // Signs outs the user
     private void signOut(){
         removeActiveFragments();
-        activity.removeFragment(mainFragment);
+        activity.removeFragment(navFragment);
 
         Intent result = new Intent();
         result.putExtra("signout", true);
@@ -196,5 +217,10 @@ public class MainController {
         activity.finish();
     }
 
-
+/*
+    Getters
+ */
+    public int getHashid(){
+        return hashid;
+    }
 }

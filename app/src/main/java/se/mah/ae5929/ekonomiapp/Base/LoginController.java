@@ -8,6 +8,7 @@ import se.mah.ae5929.ekonomiapp.R;
 
 /**
  * Created by Zarokhan on 2016-09-08.
+ * Handles user login
  */
 public class LoginController {
     private LoginActivity activity;
