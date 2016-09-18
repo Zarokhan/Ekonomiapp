@@ -61,6 +61,7 @@ public class ViewPagerFragment extends BaseFragment<MainController> {
         mCollectionPagerAdapter.setMode(mode);
         mCollectionPagerAdapter.setHashid(hashid);
         mCollectionPagerAdapter.setContext(getActivity().getApplicationContext());
+        mCollectionPagerAdapter.setController(getController());
 
         mViewPager = (ViewPager)view.findViewById(R.id.pager);
         mViewPager.setAdapter(mCollectionPagerAdapter);

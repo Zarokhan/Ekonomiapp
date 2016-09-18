@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import se.mah.ae5929.ekonomiapp.Base.MainController;
 import se.mah.ae5929.ekonomiapp.EkonomiFragments.ListFragment;
 import se.mah.ae5929.ekonomiapp.EkonomiFragments.ViewPagerFragment;
 
@@ -13,6 +14,7 @@ import se.mah.ae5929.ekonomiapp.EkonomiFragments.ViewPagerFragment;
  * Created by Zarokhan on 2016-09-17.
  */
 public class MyCategoryAdapter extends FragmentStatePagerAdapter {
+    private MainController controller;
     private Context context;
     private ViewPagerMode mode;
     private int hashid;
@@ -38,6 +40,7 @@ public class MyCategoryAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int i) {
         ListFragment frag = new ListFragment();
+        frag.setController(controller);
         Bundle args = new Bundle();
 
         MyDatabase db = MyDatabase.getInstance(context);
@@ -91,5 +94,9 @@ public class MyCategoryAdapter extends FragmentStatePagerAdapter {
             incomeCats = db.getIncomeCategories();
             expenseCats = db.getExpenseCategories();
         }
+    }
+
+    public void setController(MainController controller) {
+        this.controller = controller;
     }
 }

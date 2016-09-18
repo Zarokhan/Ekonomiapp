@@ -20,18 +20,69 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/mode"
-            android:id="@+id/textView" />
+            android:id="@+id/modeTv"
+            android:textSize="@dimen/sub_header"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/category"
-            android:id="@+id/textView2" />
+            android:id="@+id/categoryTv"
+            android:textSize="@dimen/sub_header"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/date"
-            android:id="@+id/textView3" />
+            android:id="@+id/dateTv"
+            android:textSize="@dimen/sub_header"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title"
+                android:textSize="@dimen/sub_header"
+                android:id="@+id/titleTv" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:textSize="@dimen/sub_header"
+                android:id="@+id/titleEt" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total"
+                android:textSize="@dimen/sub_header"
+                android:id="@+id/totalTv"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:textSize="@dimen/sub_header"
+                android:id="@+id/totalEt" />
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_submit"
+            android:id="@+id/submitBn" />
     </LinearLayout>
 </FrameLayout>

@@ -7,9 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import se.mah.ae5929.ekonomiapp.Base.MainController;
 import se.mah.ae5929.ekonomiapp.DBNodes.ExpenseObj;
 import se.mah.ae5929.ekonomiapp.DBNodes.IncomeObj;
 import se.mah.ae5929.ekonomiapp.R;
@@ -23,13 +25,14 @@ import se.mah.ae5929.ekonomiapp.Utility.ViewPagerMode;
  * A simple {@link Fragment} subclass.
  * List all incomes/expenses within a specific category
  */
-public class ListFragment extends BaseFragment {
+public class ListFragment extends BaseFragment<MainController> {
 
     public static final String TAG = "ListFragment";
 
     private TextView categoryTv;
     private TextView summaryTv;
     private ListView entryLv;
+    private Button insertBn;
 
     private ViewPagerMode mode;
     private String category;
@@ -50,6 +53,7 @@ public class ListFragment extends BaseFragment {
         categoryTv = (TextView)view.findViewById(R.id.categoryTv);
         summaryTv = (TextView)view.findViewById(R.id.summaryTv);
         entryLv = (ListView)view.findViewById(R.id.entryLv);
+        insertBn = (Button)view.findViewById(R.id.insertBn);
 
         Resources res = getActivity().getResources();
         MyDatabase db = MyDatabase.getInstance(getActivity().getApplicationContext());
@@ -75,7 +79,7 @@ public class ListFragment extends BaseFragment {
                 break;
         }
 
-
+        insertBn.setOnClickListener(new InsertClickListener());
     }
 
     @Override
@@ -91,5 +95,12 @@ public class ListFragment extends BaseFragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+    }
+
+    private class InsertClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            controller.insert();
+        }
     }
 }

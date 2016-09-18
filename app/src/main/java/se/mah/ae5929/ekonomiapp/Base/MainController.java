@@ -11,7 +11,10 @@ import android.view.Gravity;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import se.mah.ae5929.ekonomiapp.EkonomiFragments.NavigatorFragment;
@@ -158,6 +161,21 @@ public class MainController extends BaseController<MainActivity> {
         getActivity().addMainFragment(frag, ViewPagerFragment.TAG);
     }
 
+    // Start insert activity
+    public void insert(){
+        Intent intent = new Intent(activity.getApplicationContext(), InsertActivity.class);
+        intent.putExtra("mode", mode.ordinal());
+
+        String cat = (mode == ViewPagerMode.Incomes) ? db.getIncomeCategories()[selectedTab] : db.getExpenseCategories()[selectedTab];
+        intent.putExtra("category", cat);
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String date = df.format(Calendar.getInstance().getTime());
+        intent.putExtra("date", date);
+
+        activity.startActivityForResult(intent, MainActivity.NAME);
+    }
+
     // Adds image to actionbar
     private void actionBarImage(){
         // Action bar test
@@ -196,10 +214,12 @@ public class MainController extends BaseController<MainActivity> {
                 break;
             // Incomes
             case 1:
+                mode = ViewPagerMode.Incomes;
                 addIncomeOverview();
                 break;
             // Expenses
             case 2:
+                mode = ViewPagerMode.Expenses;
                 addExpenseOverview();
                 break;
             // Sign out
@@ -227,5 +247,6 @@ public class MainController extends BaseController<MainActivity> {
     public int getHashid(){
         return hashid;
     }
+
 
 }

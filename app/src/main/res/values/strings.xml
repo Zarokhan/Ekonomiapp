@@ -20,7 +20,9 @@
 
     <string name="expenses">Expenses</string>
     <string name="incomes">Incomes</string>
+
     <string name="btn_add">Insert</string>
+    <string name="btn_submit">Submit</string>
 
     <string name="mode">Mode:</string>
     <string name="category">Category:</string>
