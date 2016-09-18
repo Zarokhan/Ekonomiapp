@@ -147,7 +147,7 @@ public class MyDatabase extends SQLiteOpenHelper {
         int titleIndex, removableIndex;
 
         SQLiteDatabase db = getWritableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM icategory", null);
+        Cursor c = db.rawQuery("SELECT * FROM icategory ORDER BY title", null);
         titleIndex = c.getColumnIndex("title");
         removableIndex = c.getColumnIndex("removable");
 
@@ -156,9 +156,13 @@ public class MyDatabase extends SQLiteOpenHelper {
             cats.add(c.getString(titleIndex));
         }
 
-        String[] stringarray = new String[cats.size()];
+        String[] stringarray = new String[cats.size() + 1];
         for(int i = 0; i < stringarray.length; ++i){
-            stringarray[i] = cats.get(i);
+            if(i == 0) {
+                stringarray[i] = "All";
+                continue;
+            }
+            stringarray[i] = cats.get(i - 1);
         }
 
         return stringarray;
@@ -170,7 +174,7 @@ public class MyDatabase extends SQLiteOpenHelper {
         int titleIndex, removableIndex;
 
         SQLiteDatabase db = getWritableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM ecategory", null);
+        Cursor c = db.rawQuery("SELECT * FROM ecategory ORDER BY title", null);
         titleIndex = c.getColumnIndex("title");
         removableIndex = c.getColumnIndex("removable");
 
@@ -179,21 +183,36 @@ public class MyDatabase extends SQLiteOpenHelper {
             cats.add(c.getString(titleIndex));
         }
 
-        String[] stringarray = new String[cats.size()];
+        String[] stringarray = new String[cats.size() + 1];
         for(int i = 0; i < stringarray.length; ++i){
-            stringarray[i] = cats.get(i);
+            if(i == 0){
+                stringarray[i] = "All";
+                continue;
+            }
+            stringarray[i] = cats.get(i - 1);
         }
 
         return stringarray;
     }
 
     // Gets only income fields from certain category
-    public IncomeObj[] getIncomeFromCategory(String category, int hashid){
+    public IncomeObj[] getIncomeFromCategory(String category, int hashid, String dateMin, String dateMax){
         List<IncomeObj> objs = new ArrayList<IncomeObj>();
         int idIndex, catIndex, dateIndex, titleIndex, amountIndex;
 
+        String dateSQL = "";
+
+        if(dateMin != null && dateMax != null)
+            dateSQL = "AND mydate BETWEEN " + dateMin + " AND " + dateMax;
+
+        String sql = "SELECT * FROM incomes WHERE category='" + category + "' AND hashid=" + hashid + " " + dateSQL + " ORDER BY strftime('%s', mydate) DESC";
+
+        if(category == "All"){
+            sql = "SELECT * FROM incomes WHERE hashid=" + hashid + " " + dateSQL + " ORDER BY strftime('%s', mydate) DESC";
+        }
+
         SQLiteDatabase db = getWritableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM incomes WHERE category='" + category + "' AND hashid=" + hashid, null);
+        Cursor c = db.rawQuery(sql, null);
         idIndex = c.getColumnIndex("id");
         catIndex = c.getColumnIndex("category");
         dateIndex = c.getColumnIndex("mydate");
@@ -213,12 +232,23 @@ public class MyDatabase extends SQLiteOpenHelper {
     }
 
     // Gets expenses from certain category
-    public ExpenseObj[] getExpenseFromCategory(String category, int hashid){
+    public ExpenseObj[] getExpenseFromCategory(String category, int hashid, String dateMin, String dateMax){
         List<ExpenseObj> objs = new ArrayList<ExpenseObj>();
         int idIndex, catIndex, dateIndex, titleIndex, priceIndex;
 
+        String dateSQL = "";
+
+        if(dateMin != null && dateMax != null)
+            dateSQL = "AND strftime('%s', mydate) >= strftime('%s', " + dateMin + ") AND strftime('%s', mydate) <= strftime('%s', " + dateMax + ")";
+
+        String sql = "SELECT * FROM expenses WHERE category='" + category + "' AND hashid=" + hashid + " " + dateSQL + " ORDER BY strftime('%s', mydate) DESC";
+
+        if(category == "All"){
+            sql = "SELECT * FROM expenses WHERE hashid=" + hashid + " " + dateSQL + " ORDER BY strftime('%s', mydate) DESC";
+        }
+
         SQLiteDatabase db = getWritableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM expenses WHERE category='" + category + "' AND hashid=" + hashid, null);
+        Cursor c = db.rawQuery(sql, null);
         idIndex = c.getColumnIndex("id");
         catIndex = c.getColumnIndex("category");
         dateIndex = c.getColumnIndex("mydate");
@@ -242,8 +272,13 @@ public class MyDatabase extends SQLiteOpenHelper {
         int amount = 0;
         int amountIndex;
 
+        String sql = "SELECT * FROM incomes WHERE category='" + category + "' AND hashid=" + hashid + " ORDER BY strftime('%s', mydate) DESC";
+
+        if(category == "All")
+            sql = "SELECT * FROM incomes WHERE hashid=" + hashid + " ORDER BY strftime('%s', mydate) DESC";
+
         SQLiteDatabase db = getWritableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM incomes WHERE category='" + category + "' AND hashid=" + hashid + ";", null);
+        Cursor c = db.rawQuery(sql, null);
         amountIndex = c.getColumnIndex("amount");
 
         for(int i = 0; i < c.getCount(); ++i){
@@ -258,8 +293,13 @@ public class MyDatabase extends SQLiteOpenHelper {
         int price = 0;
         int priceIndex;
 
+        String sql = "SELECT * FROM expenses WHERE category='" + category + "' AND hashid=" + hashid + " ORDER BY strftime('%s', mydate) DESC";
+
+        if(category == "All")
+            sql = "SELECT * FROM expenses WHERE hashid=" + hashid + " ORDER BY strftime('%s', mydate) DESC";
+
         SQLiteDatabase db = getWritableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM expenses WHERE category='" + category + "' AND hashid=" + hashid + ";", null);
+        Cursor c = db.rawQuery(sql, null);
         priceIndex = c.getColumnIndex("price");
 
         for(int i = 0; i < c.getCount(); ++i){
@@ -267,5 +307,16 @@ public class MyDatabase extends SQLiteOpenHelper {
             price += c.getInt(priceIndex);
         }
         return price;
+    }
+
+    // Insert income entry
+    public void insertIncomeObj(int hashid, IncomeObj obj){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("INSERT INTO incomes (hashid, category, mydate, title, amount) VALUES (" + hashid + ", '" + obj.getCategory() + "', '" + obj.getMydate() + "', '" + obj.getTitle() + "', " + obj.getAmount() + ");");
+    }
+
+    public void insertExpenseObj(int hashid, ExpenseObj obj) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("INSERT INTO expenses (hashid, category, mydate, title, price) VALUES (" + hashid + ", '" + obj.getCategory() + "', '" + obj.getMydate() + "', '" + obj.getTitle() + "', " + obj.getPrice() + ");");
     }
 }

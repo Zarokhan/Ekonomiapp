@@ -49,6 +49,8 @@ public class MyCategoryAdapter extends FragmentStatePagerAdapter {
 
         args.putInt("mode", mode.ordinal());
         args.putInt("hashid", hashid);
+        args.putString("from", controller.getDateFrom());
+        args.putString("to", controller.getDateTo());
 
         switch (mode){
             case Incomes:

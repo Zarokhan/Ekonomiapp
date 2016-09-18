@@ -41,6 +41,8 @@ public class MainController extends BaseController<MainActivity> {
     private int hashid;
     private String fname;
     private String lname;
+    private String dateFrom;
+    private String dateTo;
 
     private static MyDatabase db;
 
@@ -87,7 +89,7 @@ public class MainController extends BaseController<MainActivity> {
         SharedPreferences sharedPreferences = activity.getSharedPreferences(NavigatorFragment.FRAGMENT_KEY, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         selectedTab = currentItem;
-        editor.putInt(SELECT_TAB_KEY, currentItem);
+        editor.putInt(SELECT_TAB_KEY, selectedTab);
         editor.apply();
     }
 
@@ -131,8 +133,10 @@ public class MainController extends BaseController<MainActivity> {
         bundle.putInt("mode", mode.ordinal());
         bundle.putInt("hashid", hashid);
         bundle.putInt(SELECT_TAB_KEY, selectedTab);
+        bundle.putString("from", dateFrom);
+        bundle.putString("to", dateTo);
 
-        saveSelectTab(0);
+        saveSelectTab(selectedTab);
 
         ViewPagerFragment frag = new ViewPagerFragment();
         frag.setController(this);
@@ -150,8 +154,10 @@ public class MainController extends BaseController<MainActivity> {
         bundle.putInt("mode", mode.ordinal());
         bundle.putInt("hashid", hashid);
         bundle.putInt(SELECT_TAB_KEY, selectedTab);
+        bundle.putString("from", dateFrom);
+        bundle.putString("to", dateTo);
 
-        saveSelectTab(0);
+        saveSelectTab(selectedTab);
 
         ViewPagerFragment frag = new ViewPagerFragment();
         frag.setController(this);
@@ -162,16 +168,16 @@ public class MainController extends BaseController<MainActivity> {
     }
 
     // Start insert activity
-    public void insert(){
+    public void addInsertActivity(String category){
         Intent intent = new Intent(activity.getApplicationContext(), InsertActivity.class);
         intent.putExtra("mode", mode.ordinal());
 
-        String cat = (mode == ViewPagerMode.Incomes) ? db.getIncomeCategories()[selectedTab] : db.getExpenseCategories()[selectedTab];
-        intent.putExtra("category", cat);
+        intent.putExtra("category", category);
 
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String date = df.format(Calendar.getInstance().getTime());
         intent.putExtra("date", date);
+        intent.putExtra("hashid", hashid);
 
         activity.startActivityForResult(intent, MainActivity.NAME);
     }
@@ -231,7 +237,7 @@ public class MainController extends BaseController<MainActivity> {
     }
 
     // Signs outs the user
-    private void signOut(){
+    public void signOut(){
         removeActiveFragments();
         getActivity().removeFragment(navFragment);
 
@@ -241,12 +247,34 @@ public class MainController extends BaseController<MainActivity> {
         activity.finish();
     }
 
-/*
-    Getters
- */
     public int getHashid(){
         return hashid;
     }
 
+    public void refreshPage() {
+        //removeActiveFragments();
+        initOverview(selectedItem);
+    }
 
+    public void startDateActivity(String mode) {
+        Intent intent = new Intent(getActivity().getApplicationContext(), DateActivity.class);
+        intent.putExtra("mode", mode);
+        activity.startActivityForResult(intent, MainActivity.NAME);
+    }
+
+    public void setDateTo(String date) {
+        dateTo = date;
+    }
+
+    public void setDateFrom(String date) {
+        dateFrom = date;
+    }
+
+    public String getDateFrom() {
+        return dateFrom;
+    }
+
+    public String getDateTo() {
+        return dateTo;
+    }
 }

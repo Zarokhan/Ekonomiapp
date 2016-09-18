@@ -52,7 +52,22 @@
                 android:layout_height="wrap_content"
                 android:text="@string/total_expenses"
                 android:id="@+id/expensesTv"
-                android:textSize="@dimen/sub_header"/>
+                android:textSize="@dimen/sub_header"
+                android:paddingBottom="@dimen/spacing"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total_plus_minus"
+                android:id="@+id/statusTv"
+                android:textSize="@dimen/sub_header" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

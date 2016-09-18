@@ -30,12 +30,26 @@
             android:id="@+id/categoryTv"
             android:textSize="@dimen/sub_header"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/date"
-            android:id="@+id/dateTv"
-            android:textSize="@dimen/sub_header"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/date"
+                android:id="@+id/dateTv"
+                android:textSize="@dimen/sub_header"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:ems="10"
+                android:id="@+id/dateEt"
+                android:textSize="@dimen/sub_header"/>
+        </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -84,5 +98,12 @@
             android:layout_height="wrap_content"
             android:text="@string/btn_submit"
             android:id="@+id/submitBn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/warningTv"
+            android:textColor="@color/warning_msg"/>
     </LinearLayout>
 </FrameLayout>

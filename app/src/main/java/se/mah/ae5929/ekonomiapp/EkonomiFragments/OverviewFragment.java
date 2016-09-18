@@ -26,6 +26,7 @@ public class OverviewFragment extends BaseFragment<MainController> {
     private TextView nameTv;
     private TextView incomesTv;
     private TextView expensesTv;
+    private TextView statusTv;
 
     public OverviewFragment() {
         // Required empty public constructor
@@ -45,6 +46,7 @@ public class OverviewFragment extends BaseFragment<MainController> {
         nameTv = (TextView)view.findViewById(R.id.nameTv);
         incomesTv = (TextView)view.findViewById(R.id.incomesTv);
         expensesTv = (TextView)view.findViewById(R.id.expensesTv);
+        statusTv = (TextView)view.findViewById(R.id.statusTv);
 
         res = getActivity().getResources();
 
@@ -53,6 +55,7 @@ public class OverviewFragment extends BaseFragment<MainController> {
         nameTv.setText(args.getString("fname") + " " + args.getString("lname"));
         setTotalIncomes(args.getInt("total_income"));
         setTotalExpenses(args.getInt("total_expense"));
+        setTotalStatus(args.getInt("total_income") - args.getInt("total_expense"));
     }
 
     public void setTotalIncomes(int amount){
@@ -61,5 +64,9 @@ public class OverviewFragment extends BaseFragment<MainController> {
 
     public void setTotalExpenses(int amount){
         expensesTv.setText(res.getText(R.string.total_expenses) + " " + amount);
+    }
+
+    public void setTotalStatus(int amount){
+        statusTv.setText(res.getText(R.string.total_plus_minus) + " " + amount);
     }
 }

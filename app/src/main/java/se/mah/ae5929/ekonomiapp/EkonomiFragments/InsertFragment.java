@@ -27,9 +27,17 @@ public class InsertFragment extends BaseFragment<InsertController> {
     private TextView dateTv;
     private TextView titleTv;
     private TextView totalTv;
+    private TextView warningTv;
+    private EditText dateEt;
     private EditText titleEt;
     private EditText totalEt;
     private Button submitBn;
+
+    ViewPagerMode mode;
+    String cat;
+    String date;
+    String title;
+    int total;
 
     public InsertFragment() {
         // Required empty public constructor
@@ -51,6 +59,8 @@ public class InsertFragment extends BaseFragment<InsertController> {
         dateTv = (TextView)view.findViewById(R.id.dateTv);
         titleTv = (TextView)view.findViewById(R.id.titleTv);
         totalTv = (TextView)view.findViewById(R.id.totalTv);
+        warningTv = (TextView)view.findViewById(R.id.warningTv);
+        dateEt = (EditText)view.findViewById(R.id.dateEt);
         titleEt = (EditText)view.findViewById(R.id.titleEt);
         totalEt = (EditText)view.findViewById(R.id.totalEt);
         submitBn = (Button)view.findViewById(R.id.submitBn);
@@ -61,9 +71,9 @@ public class InsertFragment extends BaseFragment<InsertController> {
     private void initializeInsertFragment(){
         Bundle args = getArguments();
 
-        ViewPagerMode mode = ViewPagerMode.values()[args.getInt("mode")];
-        String cat = args.getString("category");
-        String date = args.getString("date");
+        mode = ViewPagerMode.values()[args.getInt("mode")];
+        cat = args.getString("category");
+        date = args.getString("date");
 
         Resources res = getActivity().getResources();
 
@@ -75,7 +85,7 @@ public class InsertFragment extends BaseFragment<InsertController> {
                 modeTv.setText(res.getString(R.string.mode) + res.getString(R.string.expenses));
         }
         categoryTv.setText(res.getString(R.string.category) + cat);
-        dateTv.setText(res.getString(R.string.date) + date);
+        dateEt.setText(date);
 
         submitBn.setOnClickListener(new SubmitClickListener());
     }
@@ -83,7 +93,19 @@ public class InsertFragment extends BaseFragment<InsertController> {
     private class SubmitClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-
+            title = titleEt.getText().toString();
+            date = dateEt.getText().toString();
+            try {
+                total = Integer.parseInt(totalEt.getText().toString());
+            }
+            catch (Exception e){
+                total = 0;
+            }
+            controller.submit(mode, cat, date, title, total);
         }
+    }
+
+    public void setWarningText(String text){
+        warningTv.setText(text);
     }
 }

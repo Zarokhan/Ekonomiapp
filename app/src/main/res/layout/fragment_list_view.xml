@@ -49,7 +49,24 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/from"
+                android:id="@+id/fromBn"
+                android:textSize="@dimen/small_btn_text"/>
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/to"
+                android:textSize="@dimen/small_btn_text"
+                android:id="@+id/toBn" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/btn_add"
+                android:textSize="@dimen/small_btn_text"
                 android:id="@+id/insertBn" />
 
         </LinearLayout>
