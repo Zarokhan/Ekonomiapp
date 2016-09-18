@@ -42,21 +42,26 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="New Text"
-                    android:id="@+id/titleTv" />
+                    android:text="@string/title"
+                    android:id="@+id/titleTv"
+                    android:textSize="@dimen/header"
+                    android:paddingBottom="@dimen/spacing"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="New Text"
-                    android:id="@+id/dateTv" />
+                    android:text="@string/date"
+                    android:id="@+id/dateTv"
+                    android:textSize="@dimen/sub_header"/>
             </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/amountTv" />
+                android:text="@string/incomes"
+                android:id="@+id/amountTv"
+                android:textSize="@dimen/price_amount"
+                android:textColor="@color/colorPrimaryDark"/>
 
         </LinearLayout>
 

@@ -10,12 +10,12 @@ import se.mah.ae5929.ekonomiapp.Base.MainController;
 /**
  * Created by Zarokhan on 2016-09-13.
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment<MyController extends BaseController> extends Fragment {
 
-    protected MainController controller;
+    protected MyController controller;
     protected String name;
 
-    public void setController(MainController controller){
+    public void setController(MyController controller){
         this.controller = controller;
     }
 
@@ -29,4 +29,7 @@ public abstract class BaseFragment extends Fragment {
     protected abstract void initFragmentComponents(View view);
 
     public String getName() {return this.name;}
+    protected MyController getController(){
+        return controller;
+    }
 }

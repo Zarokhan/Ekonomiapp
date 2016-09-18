@@ -8,47 +8,33 @@ import android.os.Bundle;
 
 import se.mah.ae5929.ekonomiapp.R;
 
-// NOTES
-// NOT USE PICCASSO
+public class InsertActivity extends AppCompatActivity {
+    public static final int NAME = 14;
 
-/*
-    Main activity of application
- */
-public class EkoActivity extends AppCompatActivity {
-    private MainController controller;
+    private InsertController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_eko);
+        setContentView(R.layout.activity_insert);
         initializeController();
     }
 
     private void initializeController() {
-        controller = new MainController(this);
+        controller = new InsertController(this);
     }
 
-    // Adds fragment to EkoActivity container
+    // Adds fragment to overview fragment container
     public void addFragment(Fragment frag, String tag){
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 
-        ft.replace(R.id.container, frag, tag);
-        ft.commit();
-    }
-
-    // Adds fragment to NavigatorFragment container
-    public void addMainFragment(Fragment frag, String tag){
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-
-        ft.replace(R.id.main_container, frag, tag);
+        ft.replace(R.id.insert_container, frag, tag);
         ft.commit();
     }
 
     // Removes fragment
     public void removeFragment(Fragment frag){
-
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 

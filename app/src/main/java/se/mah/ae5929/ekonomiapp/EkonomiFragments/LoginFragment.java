@@ -19,12 +19,13 @@ import android.widget.TextView;
 
 import se.mah.ae5929.ekonomiapp.Base.LoginController;
 import se.mah.ae5929.ekonomiapp.R;
+import se.mah.ae5929.ekonomiapp.Utility.BaseFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  * User interface for login
  */
-public class LoginFragment extends Fragment {
+public class LoginFragment extends BaseFragment<LoginController> {
     public static final String FRAGMENT_KEY = "loginfragment";
     public static final String FNAME_KEY = "firstname";
     private static final String LNAME_KEY = "lastname";
@@ -38,13 +39,6 @@ public class LoginFragment extends Fragment {
 
     private String blockCharacterSet = " ";
     private boolean resetRememberMe = false;
-
-    protected LoginController controller;
-    protected String name;
-
-    public void setController(LoginController controller){
-        this.controller = controller;
-    }
 
     private InputFilter filter = new InputFilter() {
 
@@ -152,6 +146,4 @@ public class LoginFragment extends Fragment {
     public void resetRememberMe(){
         this.resetRememberMe = true;
     }
-
-    public String getName() {return this.name;}
 }

@@ -17,6 +17,7 @@ import java.util.List;
 import se.mah.ae5929.ekonomiapp.EkonomiFragments.NavigatorFragment;
 import se.mah.ae5929.ekonomiapp.EkonomiFragments.OverviewFragment;
 import se.mah.ae5929.ekonomiapp.EkonomiFragments.ViewPagerFragment;
+import se.mah.ae5929.ekonomiapp.Utility.BaseController;
 import se.mah.ae5929.ekonomiapp.Utility.MyDatabase;
 import se.mah.ae5929.ekonomiapp.Utility.ViewPagerMode;
 
@@ -24,11 +25,9 @@ import se.mah.ae5929.ekonomiapp.Utility.ViewPagerMode;
  * Created by Zarokhan on 2016-09-16.
  * Handles main part of application
  */
-public class MainController {
+public class MainController extends BaseController<MainActivity> {
     private static final String SELECT_ITEM_KEY = "selectitem";
     public static final String SELECT_TAB_KEY = "selecttabhabbi";
-
-    private EkoActivity activity;
 
     private NavigatorFragment navFragment;
     private List<Fragment> activeFragments;
@@ -42,8 +41,8 @@ public class MainController {
 
     private static MyDatabase db;
 
-    public MainController(EkoActivity activity){
-        this.activity = activity;
+    public MainController(MainActivity activity){
+        super(activity);
         initializeSystem();
     }
 
@@ -57,7 +56,7 @@ public class MainController {
 
         navFragment = new NavigatorFragment();
         navFragment.setController(this);
-        activity.addFragment(navFragment, NavigatorFragment.TAG);
+        getActivity().addFragment(navFragment, NavigatorFragment.TAG);
         activeFragments = new ArrayList<Fragment>();
         db = MyDatabase.getInstance(activity.getApplicationContext());
 
@@ -84,6 +83,7 @@ public class MainController {
     public void saveSelectTab(int currentItem){
         SharedPreferences sharedPreferences = activity.getSharedPreferences(NavigatorFragment.FRAGMENT_KEY, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        selectedTab = currentItem;
         editor.putInt(SELECT_TAB_KEY, currentItem);
         editor.apply();
     }
@@ -91,7 +91,7 @@ public class MainController {
     // Removes active fragments in main container
     private void removeActiveFragments(){
         for(int i = 0; i < activeFragments.size(); ++i){
-            activity.removeFragment(activeFragments.get(i));
+            getActivity().removeFragment(activeFragments.get(i));
         }
     }
 
@@ -117,7 +117,7 @@ public class MainController {
         overfrag.setArguments(bundle);
 
         activeFragments.add(overfrag);
-        activity.addMainFragment(overfrag, OverviewFragment.TAG);
+        getActivity().addMainFragment(overfrag, OverviewFragment.TAG);
     }
 
     // Adds income fragment into main container
@@ -129,12 +129,14 @@ public class MainController {
         bundle.putInt("hashid", hashid);
         bundle.putInt(SELECT_TAB_KEY, selectedTab);
 
+        saveSelectTab(0);
+
         ViewPagerFragment frag = new ViewPagerFragment();
         frag.setController(this);
         frag.setArguments(bundle);
 
         activeFragments.add(frag);
-        activity.addMainFragment(frag, ViewPagerFragment.TAG);
+        getActivity().addMainFragment(frag, ViewPagerFragment.TAG);
     }
 
     // Adds expense fragment into main container
@@ -146,18 +148,20 @@ public class MainController {
         bundle.putInt("hashid", hashid);
         bundle.putInt(SELECT_TAB_KEY, selectedTab);
 
+        saveSelectTab(0);
+
         ViewPagerFragment frag = new ViewPagerFragment();
         frag.setController(this);
         frag.setArguments(bundle);
 
         activeFragments.add(frag);
-        activity.addMainFragment(frag, ViewPagerFragment.TAG);
+        getActivity().addMainFragment(frag, ViewPagerFragment.TAG);
     }
 
     // Adds image to actionbar
     private void actionBarImage(){
         // Action bar test
-        ActionBar actionBar = activity.getSupportActionBar();
+        ActionBar actionBar = getActivity().getSupportActionBar();
         actionBar.setDisplayOptions(actionBar.getDisplayOptions() | ActionBar.DISPLAY_SHOW_CUSTOM);
         ImageView imageView = new ImageView(actionBar.getThemedContext());
         imageView.setScaleType(ImageView.ScaleType.CENTER);
@@ -209,7 +213,7 @@ public class MainController {
     // Signs outs the user
     private void signOut(){
         removeActiveFragments();
-        activity.removeFragment(navFragment);
+        getActivity().removeFragment(navFragment);
 
         Intent result = new Intent();
         result.putExtra("signout", true);
@@ -223,4 +227,5 @@ public class MainController {
     public int getHashid(){
         return hashid;
     }
+
 }

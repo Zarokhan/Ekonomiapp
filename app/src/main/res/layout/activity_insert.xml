@@ -3,10 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Base.MainActivity">
+    tools:context="se.mah.ae5929.ekonomiapp.Base.InsertActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/container"></FrameLayout>
+
+        android:id="@+id/insert_container"></FrameLayout>
 </LinearLayout>

@@ -27,7 +27,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/firstname"
-                android:id="@+id/nameTv" />
+                android:id="@+id/nameTv"
+                android:textSize="@dimen/sub_header"/>
 
             <EditText
                 android:layout_width="0dp"
@@ -36,7 +37,8 @@
                 android:freezesText="true"
                 android:ems="10"
                 android:id="@+id/nameEt"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textSize="@dimen/sub_header"/>
         </LinearLayout>
 
         <LinearLayout
@@ -49,7 +51,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/lastname"
-                android:id="@+id/surnameTv" />
+                android:id="@+id/surnameTv"
+                android:textSize="@dimen/sub_header"/>
 
             <EditText
                 android:layout_width="0dp"
@@ -58,7 +61,8 @@
                 android:freezesText="true"
                 android:ems="10"
                 android:id="@+id/surnameEt"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textSize="@dimen/sub_header"/>
 
         </LinearLayout>
 
@@ -73,7 +77,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/login"
                 android:id="@+id/loginBn"
-                android:layout_weight="0" />
+                android:layout_weight="0"
+                android:textSize="@dimen/sub_header"/>
 
         </LinearLayout>
 

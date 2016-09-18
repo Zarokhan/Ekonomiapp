@@ -20,9 +20,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Text"
+            android:text="Name"
             android:id="@+id/nameTv"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:textSize="@dimen/header"
+            android:paddingBottom="@dimen/spacing"/>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -34,7 +36,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/total_incomes"
-                android:id="@+id/incomesTv" />
+                android:id="@+id/incomesTv"
+                android:textSize="@dimen/sub_header"
+                android:paddingBottom="@dimen/spacing"/>
         </LinearLayout>
 
         <LinearLayout
@@ -47,7 +51,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/total_expenses"
-                android:id="@+id/expensesTv" />
+                android:id="@+id/expensesTv"
+                android:textSize="@dimen/sub_header"/>
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

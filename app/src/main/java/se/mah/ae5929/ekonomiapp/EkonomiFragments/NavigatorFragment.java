@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import se.mah.ae5929.ekonomiapp.Base.MainController;
 import se.mah.ae5929.ekonomiapp.R;
 import se.mah.ae5929.ekonomiapp.Utility.BaseFragment;
 
@@ -21,7 +22,7 @@ import se.mah.ae5929.ekonomiapp.Utility.BaseFragment;
  * Navigator of application
  * Main fragment of application
  */
-public class NavigatorFragment extends BaseFragment {
+public class NavigatorFragment extends BaseFragment<MainController> {
     public static final String FRAGMENT_KEY = "jaskdhfkashdfklashdf";
     public static final String TAG = "MAINFRAGMENT";
 
@@ -60,7 +61,7 @@ public class NavigatorFragment extends BaseFragment {
     private class DrawerItemClickListener implements android.widget.AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            controller.navSelectItem(position, mDrawerList, mPlanetTitles, mDrawerLayout);
+            getController().navSelectItem(position, mDrawerList, mPlanetTitles, mDrawerLayout);
         }
     }
 

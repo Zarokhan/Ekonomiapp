@@ -1,9 +1,7 @@
 package se.mah.ae5929.ekonomiapp.EkonomiFragments;
 
-
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -21,7 +19,7 @@ import se.mah.ae5929.ekonomiapp.Utility.ViewPagerMode;
  * A simple {@link Fragment} subclass.
  *
  */
-public class ViewPagerFragment extends BaseFragment {
+public class ViewPagerFragment extends BaseFragment<MainController> {
     public static final String TAG = "ViewPagerTag";
 
     MyCategoryAdapter mCollectionPagerAdapter;

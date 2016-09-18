@@ -5,18 +5,18 @@ import android.content.res.Resources;
 
 import se.mah.ae5929.ekonomiapp.EkonomiFragments.LoginFragment;
 import se.mah.ae5929.ekonomiapp.R;
+import se.mah.ae5929.ekonomiapp.Utility.BaseController;
 
 /**
  * Created by Zarokhan on 2016-09-08.
  * Handles user login
  */
-public class LoginController {
-    private LoginActivity activity;
+public class LoginController extends BaseController<LoginActivity> {
 
     private LoginFragment loginFrag;
 
     public LoginController(LoginActivity activity){
-        this.activity = activity;
+        super(activity);
         initializeLogin();
     }
 
@@ -24,7 +24,7 @@ public class LoginController {
     private void initializeLogin(){
         loginFrag = new LoginFragment();
         loginFrag.setController(this);
-        activity.addFragment(loginFrag, LoginFragment.FRAGMENT_KEY);
+        getActivity().addFragment(loginFrag, LoginFragment.FRAGMENT_KEY);
     }
 
     // User sign in method
@@ -40,7 +40,7 @@ public class LoginController {
         // Calculate hash id
         int hashid = (fname.toLowerCase() + lname.toLowerCase()).hashCode();
 
-        Intent mainIntent = new Intent(activity.getApplicationContext(), EkoActivity.class);
+        Intent mainIntent = new Intent(activity.getApplicationContext(), MainActivity.class);
         mainIntent.putExtra("hashid", hashid);
         mainIntent.putExtra("fname", fname);
         mainIntent.putExtra("lname", lname);
@@ -50,4 +50,5 @@ public class LoginController {
     public void resetRememberMe(){
         loginFrag.resetRememberMe();
     }
+
 }

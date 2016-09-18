@@ -1,7 +1,5 @@
 package se.mah.ae5929.ekonomiapp.Base;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -10,52 +8,52 @@ import android.os.Bundle;
 
 import se.mah.ae5929.ekonomiapp.R;
 
-/*
-    Login activity
-    Start activity of application
- */
-public class LoginActivity extends AppCompatActivity {
-    public static final int NAME = 12;
+// NOTES
+// NOT USE PICCASSO
 
-    private LoginController controller;
+/*
+    Main activity of application
+ */
+public class MainActivity extends AppCompatActivity {
+
+    private MainController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_eko);
         initializeController();
     }
 
     private void initializeController() {
-        controller = new LoginController(this);
+        controller = new MainController(this);
     }
 
-    // Adds fragment to overview fragment container
+    // Adds fragment to MainActivity container
     public void addFragment(Fragment frag, String tag){
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 
-        ft.replace(R.id.test_container, frag, tag);
+        ft.replace(R.id.container, frag, tag);
+        ft.commit();
+    }
+
+    // Adds fragment to NavigatorFragment container
+    public void addMainFragment(Fragment frag, String tag){
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+
+        ft.replace(R.id.main_container, frag, tag);
         ft.commit();
     }
 
     // Removes fragment
     public void removeFragment(Fragment frag){
+
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 
         ft.remove(frag);
         ft.commit();
-    }
-
-    // When MainActivity signs out
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode== Activity.RESULT_OK && requestCode==NAME) {
-            boolean signout = data.getBooleanExtra("signout", false);
-            if(signout)
-                controller.resetRememberMe();
-        }
     }
 }

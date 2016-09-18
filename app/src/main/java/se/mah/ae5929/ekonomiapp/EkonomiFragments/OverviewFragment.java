@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import se.mah.ae5929.ekonomiapp.Base.MainController;
 import se.mah.ae5929.ekonomiapp.R;
 import se.mah.ae5929.ekonomiapp.Utility.BaseFragment;
 
@@ -17,7 +18,7 @@ import se.mah.ae5929.ekonomiapp.Utility.BaseFragment;
  * Simple overview of personal economy fragment
  * First fragment to show when user login
  */
-public class OverviewFragment extends BaseFragment {
+public class OverviewFragment extends BaseFragment<MainController> {
     public static final String TAG = "Overview_tag";
 
     private Resources res;
