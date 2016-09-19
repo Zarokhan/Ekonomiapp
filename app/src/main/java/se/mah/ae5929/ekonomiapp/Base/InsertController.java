@@ -79,6 +79,17 @@ public class InsertController extends BaseController<InsertActivity> {
         getActivity().finish();
     }
 
+    public void selectDate() {
+        Intent intent = new Intent(getActivity().getApplicationContext(), DateActivity.class);
+        intent.putExtra("mode", mode);
+        activity.startActivityForResult(intent, InsertActivity.NAME);
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+        frag.setDateButtonText(date);
+    }
+
     private class EmptyHashidException extends Exception {
 
     }

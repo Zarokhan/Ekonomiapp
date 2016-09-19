@@ -195,20 +195,32 @@ public class MyDatabase extends SQLiteOpenHelper {
         return stringarray;
     }
 
+    private String getDateFormat(String date){
+        String result = "";
+        String[] split = date.split("-");
+        for(int i = 0; i < split.length; ++i)
+            result += split[i];
+        return result;
+    }
+
     // Gets only income fields from certain category
     public IncomeObj[] getIncomeFromCategory(String category, int hashid, String dateMin, String dateMax){
         List<IncomeObj> objs = new ArrayList<IncomeObj>();
         int idIndex, catIndex, dateIndex, titleIndex, amountIndex;
 
         String dateSQL = "";
+        String orderbySQL = " ORDER BY strftime('%s', mydate) DESC";
 
-        if(dateMin != null && dateMax != null)
+        if(dateMin != null && dateMax != null){
+            dateMin = getDateFormat(dateMin);
+            dateMax = getDateFormat(dateMax);
             dateSQL = "AND mydate BETWEEN " + dateMin + " AND " + dateMax;
+        }
 
-        String sql = "SELECT * FROM incomes WHERE category='" + category + "' AND hashid=" + hashid + " " + dateSQL + " ORDER BY strftime('%s', mydate) DESC";
+        String sql = "SELECT * FROM incomes WHERE category='" + category + "' AND hashid=" + hashid + " " + dateSQL + orderbySQL;
 
         if(category == "All"){
-            sql = "SELECT * FROM incomes WHERE hashid=" + hashid + " " + dateSQL + " ORDER BY strftime('%s', mydate) DESC";
+            sql = "SELECT * FROM incomes WHERE hashid=" + hashid + " " + dateSQL + " " + orderbySQL;
         }
 
         SQLiteDatabase db = getWritableDatabase();
@@ -237,14 +249,18 @@ public class MyDatabase extends SQLiteOpenHelper {
         int idIndex, catIndex, dateIndex, titleIndex, priceIndex;
 
         String dateSQL = "";
+        String orderbySQL = " ORDER BY strftime('%s', mydate) DESC";
 
-        if(dateMin != null && dateMax != null)
-            dateSQL = "AND strftime('%s', mydate) >= strftime('%s', " + dateMin + ") AND strftime('%s', mydate) <= strftime('%s', " + dateMax + ")";
+        if(dateMin != null && dateMax != null){
+            dateMin = getDateFormat(dateMin);
+            dateMax = getDateFormat(dateMax);
+            dateSQL = "AND mydate BETWEEN " + dateMin + " AND " + dateMax;
+        }
 
-        String sql = "SELECT * FROM expenses WHERE category='" + category + "' AND hashid=" + hashid + " " + dateSQL + " ORDER BY strftime('%s', mydate) DESC";
+        String sql = "SELECT * FROM expenses WHERE category='" + category + "' AND hashid=" + hashid + " " + dateSQL + orderbySQL;
 
         if(category == "All"){
-            sql = "SELECT * FROM expenses WHERE hashid=" + hashid + " " + dateSQL + " ORDER BY strftime('%s', mydate) DESC";
+            sql = "SELECT * FROM expenses WHERE hashid=" + hashid + " " + dateSQL + " " + orderbySQL;
         }
 
         SQLiteDatabase db = getWritableDatabase();

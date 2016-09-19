@@ -66,7 +66,7 @@ INSERT INTO icategory (title, removable) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Livsmedel',
-	date('now'),
+	20160919,
 	'Mat',
 	150
 );
@@ -74,7 +74,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Livsmedel',
-	date('now'),
+	20160919,
 	'Mat',
 	150
 );
@@ -82,7 +82,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Livsmedel',
-	date('now'),
+	20160919,
 	'ICA Maxi',
 	250
 );
@@ -90,7 +90,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Livsmedel',
-	date('now'),
+	20160919,
 	'ICA Maxi',
 	560
 );
@@ -98,7 +98,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Livsmedel',
-	date('now'),
+	20160919,
 	'ICA Maxi',
 	560
 );
@@ -106,7 +106,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Livsmedel',
-	date('now'),
+	20160919,
 	'ICA Maxi',
 	560
 );
@@ -114,7 +114,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Livsmedel',
-	date('now'),
+	20160919,
 	'ICA Maxi',
 	560
 );
@@ -122,7 +122,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Boende',
-	'2016-05-25',
+	20160525,
 	'Hyra',
 	5000
 );
@@ -130,7 +130,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Boende',
-	'2016-06-25',
+	20160625,
 	'Hyra',
 	5000
 );
@@ -138,7 +138,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Boende',
-	'2016-07-25',
+	20160725,
 	'Hyra',
 	5000
 );
@@ -146,7 +146,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Boende',
-	'2016-08-25',
+	20160825,
 	'Hyra',
 	5000
 );
@@ -154,7 +154,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Resor',
-	'2016-01-11',
+	20160111,
 	'London tur & retur',
 	2600
 );
@@ -162,7 +162,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Resor',
-	'2016-02-11',
+	20160211,
 	'London tur & retur',
 	2600
 );
@@ -170,7 +170,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Resor',
-	'2016-03-11',
+	20160311,
 	'London tur & retur',
 	2600
 );
@@ -178,7 +178,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Resor',
-	'2016-04-11',
+	20160411,
 	'London tur & retur',
 	2600
 );
@@ -186,7 +186,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Resor',
-	'2016-05-11',
+	20160511,
 	'London tur & retur',
 	2600
 );
@@ -194,7 +194,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Boende',
-	'2016-09-25',
+	20160925,
 	'Hyra',
 	5000
 );
@@ -202,7 +202,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Fritid',
-	date('now'),
+	20160919,
 	'Fotboll',
 	99
 );
@@ -210,7 +210,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Fritid',
-	'2016-03-22',
+	20160322,
 	'Big Bowl - 040-680 32 88',
 	350
 );
@@ -218,7 +218,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Fritid',
-	'2016-12-22',
+	20161222,
 	'Big Bowl - 040-680 32 88',
 	350
 );
@@ -226,7 +226,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Fritid',
-	'2016-08-22',
+	20160822,
 	'Big Bowl - 040-680 32 88',
 	350
 );
@@ -234,7 +234,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Fritid',
-	'2016-03-15',
+	20160315,
 	'Big Bowl - 040-680 32 88',
 	350
 );
@@ -242,7 +242,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Övrigt',
-	'2015-11-01',
+	20151101,
 	'Babil Livs AB',
 	75
 );
@@ -250,7 +250,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Övrigt',
-	'2015-02-21',
+	20150221,
 	'Akam Livs',
 	50
 );
@@ -258,7 +258,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Övrigt',
-	'2015-05-11',
+	20150511,
 	'Aryana Livs',
 	75
 );
@@ -266,7 +266,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Övrigt',
-	'2016-11-07',
+	20161107,
 	'Babil Livs AB',
 	100
 );
@@ -274,7 +274,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 	677725337,
 	'Övrigt',
-	'2015-11-24',
+	20151124,
 	'Babil Livs AB',
 	200
 );
@@ -282,7 +282,7 @@ INSERT INTO expenses(hashid, category, mydate, title, price) VALUES (
 INSERT INTO incomes (hashid, category, mydate, title, amount) VALUES (
 	677725337,
 	'Lön',
-	date('now'),
+	20160919,
 	'Schööns Måleri AB',
 	26000
 );
@@ -290,7 +290,7 @@ INSERT INTO incomes (hashid, category, mydate, title, amount) VALUES (
 INSERT INTO incomes (hashid, category, mydate, title, amount) VALUES (
 	677725337,
 	'Lön',
-	date('now'),
+	20160919,
 	'Schööns Måleri AB',
 	26000
 );
@@ -298,7 +298,7 @@ INSERT INTO incomes (hashid, category, mydate, title, amount) VALUES (
 INSERT INTO incomes (hashid, category, mydate, title, amount) VALUES (
 	677725337,
 	'Lön',
-	date('now'),
+	20160919,
 	'Schööns Måleri AB',
 	26000
 );
@@ -306,7 +306,7 @@ INSERT INTO incomes (hashid, category, mydate, title, amount) VALUES (
 INSERT INTO incomes (hashid, category, mydate, title, amount) VALUES (
 	677725337,
 	'Övrigt',
-	date('now'),
+	20160919,
 	'Swish - 0720086561',
 	500
 );
@@ -314,7 +314,7 @@ INSERT INTO incomes (hashid, category, mydate, title, amount) VALUES (
 INSERT INTO incomes (hashid, category, mydate, title, amount) VALUES (
 	677725337,
 	'Övrigt',
-	date('now'),
+	20160919,
 	'Swish - 0720086561',
 	500
 );
@@ -322,7 +322,7 @@ INSERT INTO incomes (hashid, category, mydate, title, amount) VALUES (
 INSERT INTO incomes (hashid, category, mydate, title, amount) VALUES (
 	677725337,
 	'Övrigt',
-	date('now'),
+	20160919,
 	'Swish - 0720086561',
 	500
 );
@@ -330,7 +330,7 @@ INSERT INTO incomes (hashid, category, mydate, title, amount) VALUES (
 INSERT INTO incomes (hashid, category, mydate, title, amount) VALUES (
 	677725337,
 	'Övrigt',
-	date('now'),
+	20160919,
 	'Swish - 0720086561',
 	500
 );
@@ -338,7 +338,7 @@ INSERT INTO incomes (hashid, category, mydate, title, amount) VALUES (
 INSERT INTO incomes (hashid, category, mydate, title, amount) VALUES (
 	677725337,
 	'Övrigt',
-	date('now'),
+	20160919,
 	'Swish - 0720086561',
 	500
 );

@@ -42,13 +42,14 @@
                 android:id="@+id/dateTv"
                 android:textSize="@dimen/sub_header"/>
 
-            <EditText
+            <Button
+                style="?android:attr/buttonStyleSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="date"
-                android:ems="10"
-                android:id="@+id/dateEt"
-                android:textSize="@dimen/sub_header"/>
+                android:text="@string/date"
+                android:id="@+id/dateBn"
+                android:textSize="@dimen/small_btn_text"/>
+
         </LinearLayout>
 
         <LinearLayout

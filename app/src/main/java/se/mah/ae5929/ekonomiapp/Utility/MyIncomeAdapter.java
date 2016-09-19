@@ -56,7 +56,7 @@ public class MyIncomeAdapter extends ArrayAdapter<IncomeObj> {
         holder.listIv.setAdjustViewBounds(true);
 
         holder.titleTv.setText(obj.getTitle());
-        holder.dateTv.setText(obj.getMydate());
+        holder.dateTv.setText(obj.getVisualDate());
         holder.amountTv.setText("" + obj.getAmount());
 
         return convertView;

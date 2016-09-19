@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/btn_add"
                 android:textSize="@dimen/small_btn_text"
-                android:id="@+id/insertBn" />
+                android:id="@+id/insertBn"/>
 
         </LinearLayout>
 

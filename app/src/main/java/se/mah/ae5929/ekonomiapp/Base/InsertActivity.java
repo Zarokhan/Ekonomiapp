@@ -1,5 +1,7 @@
 package se.mah.ae5929.ekonomiapp.Base;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -40,5 +42,16 @@ public class InsertActivity extends AppCompatActivity {
 
         ft.remove(frag);
         ft.commit();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode== Activity.RESULT_OK && requestCode==NAME) {
+            String date = data.getStringExtra("date");
+            if(date == null)
+                return;
+            controller.setDate(date);
+        }
     }
 }

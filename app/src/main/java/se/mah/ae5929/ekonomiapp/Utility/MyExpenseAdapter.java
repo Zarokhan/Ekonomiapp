@@ -64,7 +64,7 @@ public class MyExpenseAdapter extends ArrayAdapter<ExpenseObj> {
         holder.listIv.setImageResource(imageres);
         holder.listIv.setAdjustViewBounds(true);
         holder.titleTv.setText(obj.getTitle());
-        holder.dateTv.setText(obj.getMydate());
+        holder.dateTv.setText(obj.getVisualDate());
         holder.priceTv.setText("" + obj.getPrice());
 
         return convertView;

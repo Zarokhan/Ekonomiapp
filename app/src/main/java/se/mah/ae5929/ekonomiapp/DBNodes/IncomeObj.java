@@ -31,6 +31,11 @@ public class IncomeObj {
         return mydate;
     }
 
+    public String getVisualDate(){
+        String visual = getMydate().substring(0, 4) + "-" + getMydate().substring(4, 6) + "-" + getMydate().substring(6, 8);
+        return visual;
+    }
+
     public String getTitle() {
         return title;
     }

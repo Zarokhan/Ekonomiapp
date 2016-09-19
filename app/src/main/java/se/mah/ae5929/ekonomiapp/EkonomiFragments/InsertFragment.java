@@ -28,10 +28,10 @@ public class InsertFragment extends BaseFragment<InsertController> {
     private TextView titleTv;
     private TextView totalTv;
     private TextView warningTv;
-    private EditText dateEt;
     private EditText titleEt;
     private EditText totalEt;
     private Button submitBn;
+    private Button dateBn;
 
     ViewPagerMode mode;
     String cat;
@@ -60,10 +60,10 @@ public class InsertFragment extends BaseFragment<InsertController> {
         titleTv = (TextView)view.findViewById(R.id.titleTv);
         totalTv = (TextView)view.findViewById(R.id.totalTv);
         warningTv = (TextView)view.findViewById(R.id.warningTv);
-        dateEt = (EditText)view.findViewById(R.id.dateEt);
         titleEt = (EditText)view.findViewById(R.id.titleEt);
         totalEt = (EditText)view.findViewById(R.id.totalEt);
         submitBn = (Button)view.findViewById(R.id.submitBn);
+        dateBn = (Button)view.findViewById(R.id.dateBn);
 
         initializeInsertFragment();
     }
@@ -85,16 +85,21 @@ public class InsertFragment extends BaseFragment<InsertController> {
                 modeTv.setText(res.getString(R.string.mode) + res.getString(R.string.expenses));
         }
         categoryTv.setText(res.getString(R.string.category) + cat);
-        dateEt.setText(date);
+        dateBn.setText(date);
 
         submitBn.setOnClickListener(new SubmitClickListener());
+        dateBn.setOnClickListener(new DateCliclListener());
+    }
+
+    public void setDateButtonText(String date) {
+        dateBn.setText(date);
     }
 
     private class SubmitClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             title = titleEt.getText().toString();
-            date = dateEt.getText().toString();
+            date = dateBn.getText().toString();
             try {
                 total = Integer.parseInt(totalEt.getText().toString());
             }
@@ -102,6 +107,13 @@ public class InsertFragment extends BaseFragment<InsertController> {
                 total = 0;
             }
             controller.submit(mode, cat, date, title, total);
+        }
+    }
+
+    private class DateCliclListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            controller.selectDate();
         }
     }
 
