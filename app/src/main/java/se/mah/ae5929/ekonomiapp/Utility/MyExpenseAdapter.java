@@ -61,6 +61,7 @@ public class MyExpenseAdapter extends ArrayAdapter<ExpenseObj> {
                 imageres = R.drawable.other;
                 break;
         }
+
         holder.listIv.setImageResource(imageres);
         holder.listIv.setAdjustViewBounds(true);
         holder.titleTv.setText(obj.getTitle());
@@ -70,6 +71,7 @@ public class MyExpenseAdapter extends ArrayAdapter<ExpenseObj> {
         return convertView;
     }
 
+    // View holder pattern
     class ViewHolder{
         TextView titleTv;
         TextView dateTv;

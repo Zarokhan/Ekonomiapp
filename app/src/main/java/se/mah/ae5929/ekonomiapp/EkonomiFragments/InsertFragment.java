@@ -14,6 +14,7 @@ import android.widget.TextView;
 import se.mah.ae5929.ekonomiapp.Base.InsertController;
 import se.mah.ae5929.ekonomiapp.R;
 import se.mah.ae5929.ekonomiapp.Utility.BaseFragment;
+import se.mah.ae5929.ekonomiapp.Utility.MyDatabase;
 import se.mah.ae5929.ekonomiapp.Utility.ViewPagerMode;
 
 /**
@@ -22,6 +23,7 @@ import se.mah.ae5929.ekonomiapp.Utility.ViewPagerMode;
 public class InsertFragment extends BaseFragment<InsertController> {
 
     public static final String TAG = "INSERTFRAG";
+
     private TextView modeTv;
     private TextView categoryTv;
     private TextView dateTv;
@@ -33,16 +35,13 @@ public class InsertFragment extends BaseFragment<InsertController> {
     private Button submitBn;
     private Button dateBn;
 
-    ViewPagerMode mode;
-    String cat;
-    String date;
-    String title;
-    int total;
+    private ViewPagerMode mode;
+    private String cat;
+    private String date;
+    private String title;
+    private int total;
 
-    public InsertFragment() {
-        // Required empty public constructor
-    }
-
+    public InsertFragment() { }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -99,7 +98,7 @@ public class InsertFragment extends BaseFragment<InsertController> {
         @Override
         public void onClick(View v) {
             title = titleEt.getText().toString();
-            date = dateBn.getText().toString();
+            date = MyDatabase.getInstance(null).getDateFormat(dateBn.getText().toString());
             try {
                 total = Integer.parseInt(totalEt.getText().toString());
             }

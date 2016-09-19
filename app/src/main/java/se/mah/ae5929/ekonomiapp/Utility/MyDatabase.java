@@ -26,18 +26,18 @@ public class MyDatabase extends SQLiteOpenHelper {
     private static final String DB_NAME = "database";
     private static final int DB_VERSION = 1;
 
-    Context context;
+    private Context context;
+
+    private MyDatabase(Context context) {
+        super(context, DB_NAME, null, DB_VERSION);
+        this.context = context;
+    }
 
     public static synchronized MyDatabase getInstance(Context context){
         if(instance == null){
             instance = new MyDatabase(context);
         }
         return instance;
-    }
-
-    private MyDatabase(Context context) {
-        super(context, DB_NAME, null, DB_VERSION);
-        this.context = context;
     }
 
     @Override
@@ -195,7 +195,7 @@ public class MyDatabase extends SQLiteOpenHelper {
         return stringarray;
     }
 
-    private String getDateFormat(String date){
+    public String getDateFormat(String date){
         String result = "";
         String[] split = date.split("-");
         for(int i = 0; i < split.length; ++i)
@@ -325,14 +325,15 @@ public class MyDatabase extends SQLiteOpenHelper {
         return price;
     }
 
-    // Insert income entry
+    // Insert income entry to db
     public void insertIncomeObj(int hashid, IncomeObj obj){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("INSERT INTO incomes (hashid, category, mydate, title, amount) VALUES (" + hashid + ", '" + obj.getCategory() + "', '" + obj.getMydate() + "', '" + obj.getTitle() + "', " + obj.getAmount() + ");");
+        db.execSQL("INSERT INTO incomes (hashid, category, mydate, title, amount) VALUES (" + hashid + ", '" + obj.getCategory() + "', '" + obj.getDate() + "', '" + obj.getTitle() + "', " + obj.getAmount() + ");");
     }
 
+    // Insert expense entry to db
     public void insertExpenseObj(int hashid, ExpenseObj obj) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("INSERT INTO expenses (hashid, category, mydate, title, price) VALUES (" + hashid + ", '" + obj.getCategory() + "', '" + obj.getMydate() + "', '" + obj.getTitle() + "', " + obj.getPrice() + ");");
+        db.execSQL("INSERT INTO expenses (hashid, category, mydate, title, price) VALUES (" + hashid + ", '" + obj.getCategory() + "', '" + obj.getDate() + "', '" + obj.getTitle() + "', " + obj.getPrice() + ");");
     }
 }

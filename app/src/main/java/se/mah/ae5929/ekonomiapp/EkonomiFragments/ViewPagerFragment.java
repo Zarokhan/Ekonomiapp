@@ -20,13 +20,12 @@ import se.mah.ae5929.ekonomiapp.Utility.ViewPagerMode;
  *
  */
 public class ViewPagerFragment extends BaseFragment<MainController> {
+
     public static final String TAG = "ViewPagerTag";
 
-    MyCategoryAdapter mCollectionPagerAdapter;
-    ViewPager mViewPager;
-    TabLayout mTabLayout;
-
-    private int currentItem;
+    private MyCategoryAdapter mCollectionPagerAdapter;
+    private ViewPager mViewPager;
+    private TabLayout mTabLayout;
 
     public ViewPagerFragment() { }
 
@@ -35,7 +34,6 @@ public class ViewPagerFragment extends BaseFragment<MainController> {
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_view_pager, container, false);
-        //currentItem = savedInstanceState.getInt("currentitem", 0);
         initFragmentComponents(view);
         return view;
     }

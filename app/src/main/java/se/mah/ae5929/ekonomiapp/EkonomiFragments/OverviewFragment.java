@@ -19,18 +19,16 @@ import se.mah.ae5929.ekonomiapp.Utility.BaseFragment;
  * First fragment to show when user login
  */
 public class OverviewFragment extends BaseFragment<MainController> {
+
     public static final String TAG = "Overview_tag";
 
     private Resources res;
-
     private TextView nameTv;
     private TextView incomesTv;
     private TextView expensesTv;
     private TextView statusTv;
 
-    public OverviewFragment() {
-        // Required empty public constructor
-    }
+    public OverviewFragment() { }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -19,6 +19,7 @@ import se.mah.ae5929.ekonomiapp.R;
 public class MainActivity extends AppCompatActivity {
 
     public static final int NAME = 16;
+
     private MainController controller;
 
     @Override

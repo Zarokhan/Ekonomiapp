@@ -23,6 +23,7 @@ import se.mah.ae5929.ekonomiapp.Utility.BaseFragment;
  * Main fragment of application
  */
 public class NavigatorFragment extends BaseFragment<MainController> {
+
     public static final String FRAGMENT_KEY = "jaskdhfkashdfklashdf";
     public static final String TAG = "MAINFRAGMENT";
 
@@ -48,6 +49,16 @@ public class NavigatorFragment extends BaseFragment<MainController> {
         initNavigationDrawer();
     }
 
+    private void initNavigationDrawer(){
+        // Navigation Drawer
+        mPlanetTitles = getResources().getStringArray(R.array.planets_array);
+        mDrawerLayout = (DrawerLayout) getView().findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) getView().findViewById(R.id.left_drawer);
+
+        mDrawerList.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, mPlanetTitles));
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+    }
+
     @Override
     protected void initFragmentComponents(View view) {
         name = "Overview";
@@ -63,15 +74,5 @@ public class NavigatorFragment extends BaseFragment<MainController> {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             getController().navSelectItem(position, mDrawerList, mPlanetTitles, mDrawerLayout);
         }
-    }
-
-    private void initNavigationDrawer(){
-        // Navigation Drawer
-        mPlanetTitles = getResources().getStringArray(R.array.planets_array);
-        mDrawerLayout = (DrawerLayout) getView().findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) getView().findViewById(R.id.left_drawer);
-
-        mDrawerList.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, mPlanetTitles));
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
     }
 }

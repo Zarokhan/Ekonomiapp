@@ -26,8 +26,10 @@ import se.mah.ae5929.ekonomiapp.Utility.BaseFragment;
  * User interface for login
  */
 public class LoginFragment extends BaseFragment<LoginController> {
+
     public static final String FRAGMENT_KEY = "loginfragment";
     public static final String FNAME_KEY = "firstname";
+
     private static final String LNAME_KEY = "lastname";
     private static final String REMEMBER_KEY = "dskfhlsafkj";
 

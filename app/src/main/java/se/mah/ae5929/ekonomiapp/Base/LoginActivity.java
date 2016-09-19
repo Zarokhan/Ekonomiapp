@@ -15,6 +15,7 @@ import se.mah.ae5929.ekonomiapp.R;
     Start activity of application
  */
 public class LoginActivity extends AppCompatActivity {
+
     public static final int NAME = 12;
 
     private LoginController controller;

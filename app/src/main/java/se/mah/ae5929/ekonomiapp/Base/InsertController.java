@@ -26,14 +26,10 @@ public class InsertController extends BaseController<InsertActivity> {
 
     public InsertController(InsertActivity activity){
         super(activity);
-        try {
-            initializeInsert();
-        } catch (EmptyHashidException e) {
-            e.printStackTrace();
-        }
+        initializeInsert();
     }
 
-    private void initializeInsert() throws EmptyHashidException {
+    private void initializeInsert() {
         // Get intent data
         Intent intent = activity.getIntent();
 
@@ -41,9 +37,6 @@ public class InsertController extends BaseController<InsertActivity> {
         category = intent.getStringExtra("category");
         date = intent.getStringExtra("date");
         hashid = intent.getIntExtra("hashid", 0);
-
-        if(hashid == 0)
-            throw new EmptyHashidException();
 
         frag = new InsertFragment();
         frag.setArguments(intent.getExtras());
@@ -88,9 +81,5 @@ public class InsertController extends BaseController<InsertActivity> {
     public void setDate(String date) {
         this.date = date;
         frag.setDateButtonText(date);
-    }
-
-    private class EmptyHashidException extends Exception {
-
     }
 }

@@ -29,8 +29,9 @@ import se.mah.ae5929.ekonomiapp.Utility.ViewPagerMode;
  * Handles main part of application
  */
 public class MainController extends BaseController<MainActivity> {
-    private static final String SELECT_ITEM_KEY = "selectitem";
+
     public static final String SELECT_TAB_KEY = "selecttabhabbi";
+    private static final String SELECT_ITEM_KEY = "selectitem";
 
     private NavigatorFragment navFragment;
     private List<Fragment> activeFragments;
@@ -85,6 +86,7 @@ public class MainController extends BaseController<MainActivity> {
         editor.apply();
     }
 
+    // Save function
     public void saveSelectTab(int currentItem){
         SharedPreferences sharedPreferences = activity.getSharedPreferences(NavigatorFragment.FRAGMENT_KEY, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

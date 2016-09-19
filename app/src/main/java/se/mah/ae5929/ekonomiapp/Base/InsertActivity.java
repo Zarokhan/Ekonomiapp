@@ -11,6 +11,7 @@ import android.os.Bundle;
 import se.mah.ae5929.ekonomiapp.R;
 
 public class InsertActivity extends AppCompatActivity {
+
     public static final int NAME = 14;
 
     private InsertController controller;

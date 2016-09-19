@@ -21,7 +21,8 @@
             android:layout_height="wrap_content"
             android:text="@string/mode"
             android:id="@+id/modeTv"
-            android:textSize="@dimen/sub_header"/>
+            android:textSize="@dimen/sub_header"
+            android:paddingBottom="@dimen/spacing"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,28 +30,6 @@
             android:text="@string/category"
             android:id="@+id/categoryTv"
             android:textSize="@dimen/sub_header"/>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/date"
-                android:id="@+id/dateTv"
-                android:textSize="@dimen/sub_header"/>
-
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/date"
-                android:id="@+id/dateBn"
-                android:textSize="@dimen/small_btn_text"/>
-
-        </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -92,6 +71,30 @@
                 android:ems="10"
                 android:textSize="@dimen/sub_header"
                 android:id="@+id/totalEt" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/spacing">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/date"
+                android:id="@+id/dateTv"
+                android:textSize="@dimen/sub_header"/>
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/date"
+                android:id="@+id/dateBn"
+                android:textSize="@dimen/small_btn_text"
+                />
+
         </LinearLayout>
 
         <Button
